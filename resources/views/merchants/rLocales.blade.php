@@ -24,14 +24,30 @@
                     <th>Nombre(s)</th>
                     <th>Apellidos</th>
                     <th>RFC</th>
+                    <th>Domicilio</th>
+                    <th>Teléfono 1</th>
+                    <th>Teléfono 2</th>
+                    <th>Giro(s)</th>
+                    <th>Días laborados </th>
+                    <th>Apercibimientos</th>
+                    <th>Categoría</th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach ($merchants as $merchant)
-                    @if ($monto->estatus_monto == 1)
+                    @if ($merchant->estatus_comerciante == 1)
                         <tr>
-                            <td>${{ number_format($monto->monto,2) }}</td>
-                            <td>{{ $monto->year }}</td>
+                            <td>{{ $merchant->nombre_comerciante }}</td>
+                            <td>{{ $merchant->apellido_comerciante }}</td>
+                            <td>{{ $merchant->rfc }}</td>
+                            <td>{{ $merchant->domicilio }}</td>
+                            <td>{{ $merchant->telefono1 }}</td>
+                            <td>{{ $merchant->telefono2 }}</td>
+                            <td>{{ $merchant->giro }}</td>
+                            <td>{{ $merchant->dias }}</td>
+                            <td>{{ $merchant->observaciones }}</td>
+                            <td>{{ $merchant->apercibimientos }}</td>
                         </tr>
                     @endif
                 

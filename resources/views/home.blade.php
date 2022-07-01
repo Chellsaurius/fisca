@@ -9,6 +9,17 @@
 
 @section('content')
 <div class="container">
+    @if (session('message'))
+        @if (session('message')=="success")
+            <div class="alert alert-success">
+                El comerciante ha sido registrado correctamente. 
+            </div>
+        @else
+            <div class="alert alert-error">
+                ¡Chale! Algo salió mal.
+            </div>
+        @endif
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

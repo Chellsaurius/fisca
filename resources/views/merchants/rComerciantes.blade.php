@@ -69,7 +69,7 @@
                         </div>
                         <div class="mb-3 col-3 p-3 border align-items-center d-flex justify-content-left">
                             <label for="categoria" class="form-label">Tipo de comerciante: </label>
-                            <select name="categoria" id="categoria" class="form-control" onchange="dias(this.value)">
+                            <select name="categoria" id="categoria" class="form-control" >
                                 @foreach ($types as $type)
                                     <option value="{{ $type->id_categoria }}" >{{ $type->clase }}</option>
                                 @endforeach
