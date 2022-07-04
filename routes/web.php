@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ComercianteController;
 use App\Http\Controllers\MontosController;
+use App\Http\Controllers\TianguisContoller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,11 @@ Route::controller(ComercianteController::class)->group(function() {
     Route::get('registrarComerciante', 'index')->name('rComerciantes');
     Route::post('guardarComerciante', 'saveMerchant')->name('gComerciantes');
     Route::get('registrarLocal', 'registerLocal')->name('rLocal');
+    Route::get('listaComerciante', 'listMerchant')->name('lComerciantes');
+});
+
+Route::controller(TianguisContoller::class)->group(function() {
+    Route::get('listaTuianguis', 'index')->name('lTianguis');
+    Route::get('nuevo_tianguis', 'nTianguis')->name('nTianguis');
+    Route::post('ntianguis', 'store')->name('tianguis.store');
 });

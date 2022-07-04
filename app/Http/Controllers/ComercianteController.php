@@ -54,55 +54,58 @@ class ComercianteController extends Controller
         $contador = count($request->giro);
         for ($i=0; $i < $contador; $i++) { 
             # code...
-            $business = $business.$giros[$i].',';
+            $business = $business.strtoupper($giros[$i]).',';
         }
         if($request->otrosg != null)
         {
-            $business = $business.$request->otrosg.',';
+            $business = $business.strtoupper($request->otrosg).',';
         }
 
         $contador = count($request->dia);
         for ($i=0; $i < $contador; $i++) { 
             # code...
-            $days = $days.$wdays[$i].',';
+            $days = $days.strtoupper($wdays[$i]).',';
         }
         
         //dd($wdays);
         $merchant = new Comerciante();
 
-        $merchant->nombre_comerciante = $request->nombre;
-        $merchant->apellido_comerciante = $request->apellidos;
-        $merchant->rfc = $request->rfc;
-        $merchant->domicilio = $request->direccion;
-        $merchant->telefono1 = $request->telefono1;
+        $merchant->nombre_comerciante = strtoupper($request->nombre);
+        $merchant->apellido_comerciante = strtoupper($request->apellidos);
+        $merchant->rfc = strtoupper($request->rfc);
+        $merchant->domicilio = strtoupper($request->direccion);
+        $merchant->telefono1 = strtoupper($request->telefono1);
         if ($request->telefono2 != null) {
-            $merchant->telefono2 = $request->telefono2;
+            $merchant->telefono2 = strtoupper($request->telefono2);
             # code...
         }
         
-        $merchant->giro = $business;
-        $merchant->dias = $days;
+        $merchant->giro = strtoupper($business);
+        $merchant->dias = strtoupper($days);
 
-        $merchant->id_categoria = $request->categoria;
-        $rfc = $request->rfc;
+        $merchant->id_categoria = strtoupper($request->categoria);
+        $rfc = strtoupper($request->rfc);
         //dd($merchant);
-        if ($merchant->save())
-        {
-            $message = 'success';
-        }else{
-            $message = 'error';
+        try {
+            //code...
+            sleep(2);
+            return redirect()->route('home')->with('message', 'El comerciante se ha agregado correctamente');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return view('home')->with('failureMerchantMsg','El comerciante no se ha sido registrado D:.', compact('th'));
         }
-        
-        sleep(2);
-       
-        //$merchants = Comerciante::all();
-        return view('home')->with('message', $message);;
-
+    
     }
 
     public function registerLocal(){
-        $merchants = Comerciante::all();
+        $merchants = Comerciante::all()->where('estatus_comerciante', 1);
 
         return view('merchants.rLocales', compact('merchants'));
+    }
+
+    public function listMerchant(){
+        $merchants = Comerciante::all()->where('estatus_comerciante', 1);
+        //dd($merchants);
+        return view('merchants.lComerciantes', compact('merchants'));
     }
 }

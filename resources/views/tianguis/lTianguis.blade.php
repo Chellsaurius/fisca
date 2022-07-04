@@ -6,57 +6,52 @@
 @endsection
 
 @section('title')
-    <H1>Registrar local del comerciante</H1>
-    <title>Registrar local</title>
+    <h1>Lista de tianguis</h1>
+    <title>Tianguis</title>
 @endsection
 
-@section('content')    
-    <div class="container">
-        @if(session()->has('message'))
-            <div class="alert alert-danger">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+@section('content')
 
-        <table id="montos" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Nombre(s)</th>
-                    <th>Apellidos</th>
-                    <th>RFC</th>
-                    <th>Domicilio</th>
-                    <th>Teléfono 1</th>
-                    <th>Teléfono 2</th>
-                    <th>Giro(s)</th>
-                    <th>Días laborados </th>
-                    <th>Apercibimientos</th>
-                    <th>Categoría</th>
+
+
+<div class="container">
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+    <div class="d-flex justify-content-between" >
+        <h2 class="text-start align-items-start">Lista de los Tianguis actuales.</h2>
+        <a href="{{ route('nTianguis') }}" class="btn btn-secondary d-flex align-items-end">Registra otro tianguis aqui :o</a>
+    </div>
     
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($merchants as $merchant)
-    
+    <br>
+    <div >
+    <table id="tianguis" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Día</th>
+                <th>Horario</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($tianguis as $tiangui)
+                @if ($tiangui->estatus_tianguis == 1)
                     <tr>
-                        <td>{{ $merchant->nombre_comerciante }}</td>
-                        <td>{{ $merchant->apellido_comerciante }}</td>
-                        <td>{{ $merchant->rfc }}</td>
-                        <td>{{ $merchant->domicilio }}</td>
-                        <td>{{ $merchant->telefono1 }}</td>
-                        <td>{{ $merchant->telefono2 }}</td>
-                        <td>{{ $merchant->giro }}</td>
-                        <td>{{ $merchant->dias }}</td>
-                        <td>{{ $merchant->apercibimientos }}</td>
-                        <td>{{ $merchant->categoria->clase }}</td>
+                        <td>{{ $tiangui->nombre_tianguis }}</td>
+                        <td>{{ $tiangui->dia }}</td>
+                        <td>{{ $tiangui->horario }}</td>
                     </tr>
-                    
-                
-                @endforeach
-    
-                
-            </tbody>
-        </table>
-        @section('js')
+                @endif
+            
+            @endforeach
+
+            
+        </tbody>
+    </table>
+    </div>
+    @section('js')
         <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" ></script>
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js" ></script>
@@ -89,5 +84,5 @@
             });
         </script>
     @endsection
-    </div>
+</div>
 @endsection

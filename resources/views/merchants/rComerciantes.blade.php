@@ -33,6 +33,7 @@
                         <div class="mb-3 col-4 border">
                             <label for="rfc" class="form-label">RFC</label>
                             <input type="text" name="rfc" class="form-control text-uppercase @error('rfc') is-invalid @enderror" value="{{ old('rfc') }}"
+                                pattern="[0-9]" onkeypress="return !(event.charCode == 46)" onkeydown="return event.keyCode !== 190"                            
                                 id="rfc" aria-describedby="nameHelp" required>
                             <div id="rfcHelp" class="form-text">Ingrese el RFC.</div>
                             @error('rfc')
@@ -42,6 +43,7 @@
                         <div class="mb-3 col-4 border">
                             <label for="telefono1" class="form-label">Teléfono 1</label>
                             <input type=text name="telefono1" class="form-control @error('telefono1') is-invalid @enderror" value="{{ old('telefono1') }}"
+                                pattern="[0-9]" onkeypress="return !(event.charCode == 46)" onkeydown="return event.keyCode !== 190"
                                 id="telefono1" aria-describedby="nameHelp" required>
                             <div id="telefono1Help" class="form-text">Ingrese el teléfono principal.</div>
                             @error('telefono1')
@@ -52,6 +54,7 @@
                         <div class="mb-3 col-4 border">
                             <label for="telefono2" class="form-label">Teléfono 2</label>
                             <input type=text name="telefono2" class="form-control  @error('telefono2') is-invalid @enderror" value="{{ old('telefono2') }}"
+                                pattern="[0-9]" onkeypress="return !(event.charCode == 46)" onkeydown="return event.keyCode !== 190"
                                 id="telefono2" aria-describedby="nameHelp" >
                             <div id="telefono2Help" class="form-text">Ingrese el teléfono alternativo.</div>
                             @error('telefono2')

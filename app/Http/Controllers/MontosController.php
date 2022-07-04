@@ -28,11 +28,11 @@ class MontosController extends Controller
         $monto->monto = $request->monto;
         $monto->year = $request->year;
         //dd($request, $montoOrd, $monto, $newDate);
-        if($montoOrd->year < $monto->year && $monto->year == $fModificada){
+        if($montoOrd->year < $monto->year ){
             $monto->save();
             sleep(2);
             $montos = Monto::all();
-            return view('amounts.montos', compact('montos'));
+            return redirect()->route('montos', compact('montos'))->with('message', 'Monto agregado correctamente');
         }
         else{
             return redirect()->back()->with('message', 'El año ya existe, favor de verificar correctamente.', compact('montos'));

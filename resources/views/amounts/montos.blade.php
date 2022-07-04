@@ -15,6 +15,13 @@
 
 
 <div class="container">
+   
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+    
     <div class="d-flex justify-content-between" >
         <h2 class="text-start align-items-start">Monto por metro cuadrado del año fiscal.</h2>
         <a href="{{ route('nmontos') }}" class="btn btn-secondary d-flex align-items-end">Nuevo año, nuevo costo :D</a>

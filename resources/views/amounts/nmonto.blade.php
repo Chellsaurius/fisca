@@ -7,7 +7,7 @@
 @endsection
 
 @section('title')
-    <h1>Ingresar un nuevo costo para el año en curso</h1>
+    <h1>Registrar el monto para el cobro del año fiscal.</h1>
     <title>Nuevo monto fiscal</title>
 @endsection
 
@@ -19,7 +19,7 @@
         </div>
     @endif
     <div class="d-flex justify-content-between">
-        <h2 class="text-start align-items-start">Registrar el monto para el cobro del año fiscal.</h2>
+        
         <a href="{{ route('montos') }}" class="btn btn-secondary d-flex align-items-end">No es nuevo año, retirada D:</a>
     </div>
     
@@ -30,7 +30,7 @@
             <label for="CostOfSpace" class="form-label"> Monto por metro cuadrado: </label>
             $<input type=number step=0.01 name="monto" autocomplete="off" autofocus="on" min=0 max="10.99"
                 class="form-control" id="CostOfSpace" aria-describedby="costHelp" placeholder="X.YY" 
-                pattern="[0-9]" onkeypress="return !(event.charCode == 46)" onkeydown="return event.keyCode !== 190" required>
+                 required>
             <div id="costHelp" class="form-text">Formato: solo números con 2 decimales.</div>
             @error('monto')
                 <span class="invalid-feedback" role="alert">

@@ -6,8 +6,8 @@
 @endsection
 
 @section('title')
-    <H1>Registrar local del comerciante</H1>
-    <title>Registrar local</title>
+    <H1>Lista de comerciantes</H1>
+    <title>Lista de comerciantes</title>
 @endsection
 
 @section('content')    

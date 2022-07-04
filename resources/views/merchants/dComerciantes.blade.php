@@ -6,57 +6,57 @@
 @endsection
 
 @section('title')
-    <H1>Registrar local del comerciante</H1>
-    <title>Registrar local</title>
+    <H1>Dar de baja a un comerciante</H1>
+    <title>Inhabilitar comerciante</title>
 @endsection
 
-@section('content')    
-    <div class="container">
-        @if(session()->has('message'))
-            <div class="alert alert-danger">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+@section('content') 
+<div class="container">
+    @if(session()->has('message'))
+        <div class="alert alert-danger">
+            {{ session()->get('message') }}
+        </div>
+    @endif
 
-        <table id="montos" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
-            <thead>
+    <table id="montos" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nombre(s)</th>
+                <th>Apellidos</th>
+                <th>RFC</th>
+                <th>Domicilio</th>
+                <th>Teléfono 1</th>
+                <th>Teléfono 2</th>
+                <th>Giro(s)</th>
+                <th>Días laborados </th>
+                <th>Apercibimientos</th>
+                <th>Categoría</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($merchants as $merchant)
+
                 <tr>
-                    <th>Nombre(s)</th>
-                    <th>Apellidos</th>
-                    <th>RFC</th>
-                    <th>Domicilio</th>
-                    <th>Teléfono 1</th>
-                    <th>Teléfono 2</th>
-                    <th>Giro(s)</th>
-                    <th>Días laborados </th>
-                    <th>Apercibimientos</th>
-                    <th>Categoría</th>
-    
+                    <td>{{ $merchant->nombre_comerciante }}</td>
+                    <td>{{ $merchant->apellido_comerciante }}</td>
+                    <td>{{ $merchant->rfc }}</td>
+                    <td>{{ $merchant->domicilio }}</td>
+                    <td>{{ $merchant->telefono1 }}</td>
+                    <td>{{ $merchant->telefono2 }}</td>
+                    <td>{{ $merchant->giro }}</td>
+                    <td>{{ $merchant->dias }}</td>
+                    <td>{{ $merchant->apercibimientos }}</td>
+                    <td>{{ $merchant->categoria->clase }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($merchants as $merchant)
-    
-                    <tr>
-                        <td>{{ $merchant->nombre_comerciante }}</td>
-                        <td>{{ $merchant->apellido_comerciante }}</td>
-                        <td>{{ $merchant->rfc }}</td>
-                        <td>{{ $merchant->domicilio }}</td>
-                        <td>{{ $merchant->telefono1 }}</td>
-                        <td>{{ $merchant->telefono2 }}</td>
-                        <td>{{ $merchant->giro }}</td>
-                        <td>{{ $merchant->dias }}</td>
-                        <td>{{ $merchant->apercibimientos }}</td>
-                        <td>{{ $merchant->categoria->clase }}</td>
-                    </tr>
-                    
                 
-                @endforeach
-    
-                
-            </tbody>
-        </table>
-        @section('js')
+            
+            @endforeach
+
+            
+        </tbody>
+    </table>
+    @section('js')
         <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" ></script>
         <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js" ></script>
@@ -87,7 +87,9 @@
                     },
                 });
             });
-        </script>
-    @endsection
-    </div>
+    </script>
+@endsection
+</div>
+
+
 @endsection
