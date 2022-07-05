@@ -32,7 +32,8 @@
             <tr>
                 <th>Nombre</th>
                 <th>Día</th>
-                <th>Horario</th>
+                <th>Hora de inicio</th>
+                <th>Hora de finalización</th>
             </tr>
         </thead>
         <tbody>
@@ -40,8 +41,31 @@
                 @if ($tiangui->estatus_tianguis == 1)
                     <tr>
                         <td>{{ $tiangui->nombre_tianguis }}</td>
-                        <td>{{ $tiangui->dia }}</td>
-                        <td>{{ $tiangui->horario }}</td>
+                        <td>
+                            @if ($tiangui->dia == 1)
+                                Lunes
+                            @endif
+                            @if ($tiangui->dia == 2)
+                                Martes
+                            @endif
+                            @if ($tiangui->dia == 3)
+                                Miércoles
+                            @endif
+                            @if ($tiangui->dia == 4)
+                                Jueves
+                            @endif
+                            @if ($tiangui->dia == 5)
+                                Viernes
+                            @endif
+                            @if ($tiangui->dia == 6)
+                                Sábado
+                            @endif
+                            @if ($tiangui->dia == 7)
+                                Domingo
+                            @endif
+                        </td>
+                        <td>{{ $tiangui->thora_inicio }}</td>
+                        <td>{{ $tiangui->thora_final }}</td>
                     </tr>
                 @endif
             

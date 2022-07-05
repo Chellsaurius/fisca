@@ -31,7 +31,7 @@
                     <th>Días laborados </th>
                     <th>Apercibimientos</th>
                     <th>Categoría</th>
-    
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,6 +48,7 @@
                         <td>{{ $merchant->dias }}</td>
                         <td>{{ $merchant->apercibimientos }}</td>
                         <td>{{ $merchant->categoria->clase }}</td>
+                        <td><a href="{{ route('dLocal', $merchant->rfc) }}" class="btn btn-success"> Registar local</a></td>
                     </tr>
                     
                 

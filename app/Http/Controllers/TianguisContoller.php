@@ -31,9 +31,10 @@ class TianguisContoller extends Controller
             
             $tiangui = new Tiangui();
 
-            $tiangui->nombre_tianguis = $request->nameTianguis;
+            $tiangui->nombre_tianguis = strtoupper($request->nameTianguis);
             $tiangui->dia = $request->dayTianguis;
-            $tiangui->horario = 'De '.$request->IHourTianguis.' a '.$request->FHourTianguis;
+            $tiangui->thora_inicio = $request->IHourTianguis;
+            $tiangui->thora_final = $request->FHourTianguis;
             $tiangui->save();
             sleep(2);
             $tianguis = Tiangui::all();

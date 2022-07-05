@@ -24,7 +24,7 @@
                         <div class="mb-3 col-6 border">
                             <label for="apellidos" class="form-label">Apellidos</label>
                             <input type="text" name="apellidos" class="form-control text-uppercase @error('apellidos') is-invalid @enderror" value="{{ old('apellidos') }}"
-                                id="apellidos" aria-describedby="nameHelp" required>
+                                id="apellidos" aria-describedby="apellidosHelp" required>
                             <div id="apellidosHelp" class="form-text">Ingrese los apellidos.</div>
                             @error('apellidos')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -33,7 +33,7 @@
                         <div class="mb-3 col-4 border">
                             <label for="rfc" class="form-label">RFC</label>
                             <input type="text" name="rfc" class="form-control text-uppercase @error('rfc') is-invalid @enderror" value="{{ old('rfc') }}"
-                                pattern="[0-9]" onkeypress="return !(event.charCode == 46)" onkeydown="return event.keyCode !== 190"                            
+                                                          
                                 id="rfc" aria-describedby="nameHelp" required>
                             <div id="rfcHelp" class="form-text">Ingrese el RFC.</div>
                             @error('rfc')
@@ -43,7 +43,7 @@
                         <div class="mb-3 col-4 border">
                             <label for="telefono1" class="form-label">Teléfono 1</label>
                             <input type=text name="telefono1" class="form-control @error('telefono1') is-invalid @enderror" value="{{ old('telefono1') }}"
-                                pattern="[0-9]" onkeypress="return !(event.charCode == 46)" onkeydown="return event.keyCode !== 190"
+                                pattern="[0-9]{10}" onkeypress="return !(event.charCode == 46)" onkeydown="return event.keyCode !== 190"
                                 id="telefono1" aria-describedby="nameHelp" required>
                             <div id="telefono1Help" class="form-text">Ingrese el teléfono principal.</div>
                             @error('telefono1')
