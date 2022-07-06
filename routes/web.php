@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComercianteController;
+use App\Http\Controllers\LocalesController;
 use App\Http\Controllers\MontosController;
 use App\Http\Controllers\TianguisContoller;
 use Illuminate\Support\Facades\Route;
@@ -38,12 +39,18 @@ Route::controller(ComercianteController::class)->group(function() {
     
     Route::get('listaComerciante', 'listMerchant')->name('lComerciantes');
     Route::get('registrarLocal', 'registerLocal')->name('rLocal');
-    Route::get('datosLocal/{rfc}', 'dataLocal')->name('dLocal');
-    Route::post('guardarLocal/{rfc}', 'saveLocal')->name('sLocal');
+    
 });
 
 Route::controller(TianguisContoller::class)->group(function() {
     Route::get('listaTuianguis', 'index')->name('lTianguis');
     Route::get('nuevo_tianguis', 'nTianguis')->name('nTianguis');
     Route::post('ntianguis', 'store')->name('tianguis.store');
+});
+
+Route::controller(LocalesController::class)->group(function() {
+    Route::get('listaLocales', 'index')->name('lLocales');
+    Route::get('nuevoLocalT', 'nuevoLocalT')->name('nLocalT');
+    Route::get('nuevoLocalA', 'nuevoLocalA')->name('nLocalA');
+    Route::post('guardarLocal/', 'saveLocal')->name('sLocal');
 });

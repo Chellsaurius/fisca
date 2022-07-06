@@ -36,8 +36,8 @@
           </li>
           <li class=""><a href="{{ route('rComerciantes') }}" class="text-decoration-none px-3 py-3 d-block">
             <i class="fas fa-user-plus fa-2x"></i> Registar comerciante </a></li>
-          <li class=""><a href="{{ route('rLocal') }}" class="text-decoration-none px-3 py-3 d-block">
-            <i class="fa-solid fa-map-location fa-2x"></i></i> Registar local del comerciante </a></li>
+          <li class=""><a href="{{ route('lLocales') }}" class="text-decoration-none px-3 py-3 d-block">
+            <i class="fa-solid fa-map-location fa-2x"></i></i> Locales  </a></li>
           <li class=""><a href="#" class="text-decoration-none px-3 py-3 d-block">
             <i class="fas fa-user-minus fa-2x"></i> Dar de baja comerciante </a></li>
           <li class=""><a href="{{ route('lComerciantes') }}" class="text-decoration-none px-3 py-3 d-block">

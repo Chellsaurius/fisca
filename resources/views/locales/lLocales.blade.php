@@ -6,8 +6,8 @@
 @endsection
 
 @section('title')
-    <H1>Registrar local del comerciante</H1>
-    <title>Registrar local</title>
+    <H1>Lista de locales </H1>
+    <title>Lista de locales</title>
 @endsection
 
 @section('content')    
@@ -18,37 +18,35 @@
             </div>
         @endif
 
+        <div class="d-flex justify-content-between" >
+            <a href="{{ route('nLocalT') }}" class="btn btn-secondary">Registrar nuevo local de tianguis</a>
+            <a href="{{ route('nLocalA') }}" class="btn btn-secondary">Registrar nuevo local ambulante</a>
+        </div>
+        <br>
+
         <table id="montos" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Nombre(s)</th>
-                    <th>Apellidos</th>
-                    <th>RFC</th>
-                    <th>Domicilio</th>
-                    <th>Teléfono 1</th>
-                    <th>Teléfono 2</th>
-                    <th>Giro(s)</th>
-                    <th>Días laborados </th>
-                    <th>Apercibimientos</th>
-                    <th>Categoría</th>
-                    <th>Acciones</th>
+                    <th>Dimensión X</th>
+                    <th>Dimensión Y</th>
+                    <th>Ubicación o recorrido</th>
+                    <th>Hora de inicio</th>
+                    <th>Hora de finalización</th>
+                    <th>Tianguis</th>
+                    
                 </tr>
             </thead>
             <tbody>
-                @foreach ($merchants as $merchant)
+                @foreach ($locales as $local)
     
                     <tr>
-                        <td>{{ $merchant->nombre_comerciante }}</td>
-                        <td>{{ $merchant->apellido_comerciante }}</td>
-                        <td>{{ $merchant->rfc }}</td>
-                        <td>{{ $merchant->domicilio }}</td>
-                        <td>{{ $merchant->telefono1 }}</td>
-                        <td>{{ $merchant->telefono2 }}</td>
-                        <td>{{ $merchant->giro }}</td>
-                        <td>{{ $merchant->dias }}</td>
-                        <td>{{ $merchant->apercibimientos }}</td>
-                        <td>{{ $merchant->categoria->clase }}</td>
-                        <td><a href="{{ route('dLocal', $merchant->rfc) }}" class="btn btn-success"> Registar local</a></td>
+                        <td>{{ $local->dimx }}</td>
+                        <td>{{ $local->dimy }}</td>
+                        <td>{{ $local->ubicacion_reco }}</td>
+                        <td>{{ $local->hora_inicio }}</td>
+                        <td>{{ $local->hora_final }}</td>
+                        <td>{{ $local->id_tianguis }}</td>
+                        
                     </tr>
                     
                 

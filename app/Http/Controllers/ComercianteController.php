@@ -102,52 +102,15 @@ class ComercianteController extends Controller
     
     }
 
-    public function registerLocal(){
-        $merchants = Comerciante::all()->where('estatus_comerciante', 1);
-
-        return view('merchants.rLocales', compact('merchants'));
-    }
-
     public function listMerchant(){
         $merchants = Comerciante::all()->where('estatus_comerciante', 1);
-        //dd($merchants);
+        $locals = Local::all();
+        // dd($locals);
         return view('merchants.lComerciantes', compact('merchants'));
     }
 
-    public function dataLocal($rfc) {
-        //dd($rfc);
-        $merchant = Comerciante::where('rfc', $rfc)->first();
-        $tianguis = Tiangui::where('estatus_tianguis', '!=', 2); //el distinto de 2 es por si en algún momento hay otro status en el tianguis, ejemplo: en construcción y se quiera mostrar la información
-        //dd($merchant);
+    
 
-        return view ('merchants.dLocales', compact('merchant','tianguis'));
-    }
-
-    public function saveLocal(Request $request, $rfc) {
-        //dd($request, $rfc, $tianguis);
-
-        $local = new Local();
-        $local->dimx = $request->dimx;
-        $local->dimy = $request->dimy;
-        $local->ubicacion_reco = $request->ubicacion;
-        if ($request->cat == 1) {
-            # code...
-            $tianguis = Tiangui::where('id_tiangui', $request->tianguis)->first();
-            $local->hora_inicio = $tianguis->thora_inicio; 
-            $local->hora_final = $tianguis->thora_final;
-            $local->id_tianguis = $tianguis->id_tiangui;
-        }
-        elseif ($request->cat == 2 )
-        {
-            $local->hora_inicio = $request->IHour; 
-            $local->hora_final = $request->fHour; 
-        }
-        else
-        {
-            $local->hora_inicio = $request->IHour; 
-            $local->hora_final = $request->fHour; 
-        }
-
-    }
+    
 
 }
