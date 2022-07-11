@@ -14,6 +14,16 @@
             {{ session()->get('message') }}
         </div>
     @endif
+    @if(session()->has('failureMerchantMsg'))
+        <div class="alert alert-danger">
+            {{ session()->get('failureMerchantMsg') }}
+        </div>
+    @endif
+    @if(session()->has('failureMerchantMsg'))
+        <div class="alert alert-danger">
+            {{ session()->get('th') }}
+        </div>
+    @endif
     
     <div class="row justify-content-center">
         <div class="col-md-8">

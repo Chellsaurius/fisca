@@ -20,7 +20,7 @@
 
         <div class="d-flex justify-content-between" >
             <a href="{{ route('nLocalT') }}" class="btn btn-secondary">Registrar nuevo local de tianguis</a>
-            <a href="{{ route('nLocalA') }}" class="btn btn-secondary">Registrar nuevo local ambulante</a>
+            <a href="{{ route('nLocalA') }}" class="btn btn-secondary">Registrar nuevo local ambulante o semi-fijo</a>
         </div>
         <br>
 
@@ -43,8 +43,8 @@
                         <td>{{ $local->dimx }}</td>
                         <td>{{ $local->dimy }}</td>
                         <td>{{ $local->ubicacion_reco }}</td>
-                        <td>{{ $local->hora_inicio }}</td>
-                        <td>{{ $local->hora_final }}</td>
+                        <td>{{ $local->lhora_inicio }}</td>
+                        <td>{{ $local->lhora_final }}</td>
                         <td>{{ $local->id_tianguis }}</td>
                         
                     </tr>

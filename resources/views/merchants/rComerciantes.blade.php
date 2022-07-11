@@ -85,33 +85,33 @@
                                 <div class="@error('dia') is-invalid @enderror"></div>
                                 <label for="dias" class="form-label">Días laborales</label>
                                 <div class="d-flex justify-content-left col-1 border align-items-center p-2">
-                                    <input type="checkbox" name="dia[]" value="Lunes" class="form-check-input m-1" id="Lunes">
-                                    <label class="form-check-label" for="Lunes"> Lunes</label>
+                                    <input type="checkbox" name="dia[]" value="1" class="form-check-input m-1" id="1">
+                                    <label class="form-check-label" for="1"> Lunes</label>
                                 </div>
 
                                 <div class="d-flex justify-content-left col-1 border align-items-center p-2">
-                                    <input type="checkbox" name="dia[]" value="Martes" class="form-check-input m-1" id="Martes">
-                                    <label class="form-check-label" for="Martes"> Martes</label>
+                                    <input type="checkbox" name="dia[]" value="2" class="form-check-input m-1" id="2">
+                                    <label class="form-check-label" for="2"> Martes</label>
                                 </div>
                                 <div class="d-flex justify-content-left col-1 border align-items-center p-2">
-                                    <input type="checkbox" name="dia[]" value="Miércoles" class="form-check-input m-1" id="Miércoles">
-                                    <label class="form-check-label" for="Miércoles"> Miércoles</label>
+                                    <input type="checkbox" name="dia[]" value="3" class="form-check-input m-1" id="3">
+                                    <label class="form-check-label" for="3"> Miércoles</label>
                                 </div>
                                 <div class="d-flex justify-content-left col-1 border align-items-center p-2">
-                                    <input type="checkbox" name="dia[]" value="Jueves" class="form-check-input m-1" id="Jueves">
-                                    <label class="form-check-label" for="Jueves"> Jueves</label>
+                                    <input type="checkbox" name="dia[]" value="4" class="form-check-input m-1" id="4">
+                                    <label class="form-check-label" for="4"> Jueves</label>
                                 </div>
                                 <div class="d-flex justify-content-left col-1 border align-items-center p-2">
-                                    <input type="checkbox" name="dia[]" value="Viernes" class="form-check-input m-1" id="Viernes">
-                                    <label class="form-check-label" for="Viernes"> Viernes</label>
+                                    <input type="checkbox" name="dia[]" value="5" class="form-check-input m-1" id="5">
+                                    <label class="form-check-label" for="5"> Viernes</label>
                                 </div>
                                 <div class="d-flex justify-content-left col-1 border align-items-center p-2">
-                                    <input type="checkbox" name="dia[]" value="Sábado" class="form-check-input m-1" id="Sábado">
-                                    <label class="form-check-label" for="Sábado"> Sábado</label>
+                                    <input type="checkbox" name="dia[]" value="6" class="form-check-input m-1" id="6">
+                                    <label class="form-check-label" for="6"> Sábado</label>
                                 </div>
                                 <div class="d-flex justify-content-left col-1 border align-items-center p-2">
-                                    <input type="checkbox" name="dia[]" value="Domingo" class="form-check-input m-1" id="Domingo">
-                                    <label class="form-check-label" for="Domingo"> Domingo</label>
+                                    <input type="checkbox" name="dia[]" value="7" class="form-check-input m-1" id="7">
+                                    <label class="form-check-label" for="7"> Domingo</label>
                                 </div>
                                 @error('dia')
                                     <span class="invalid-feedback col-12 p-3" role="alert"><strong>{{ $message }}</strong></span>

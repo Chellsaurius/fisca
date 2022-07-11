@@ -6,6 +6,11 @@
 @endsection
 
 @section('content')   
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
     <div class="container col-md-12">
         <div class="border shadow-lg p-3 mb-5 bg-body rounded">
             <div class="d-flex justify-content-left row col-md-12">

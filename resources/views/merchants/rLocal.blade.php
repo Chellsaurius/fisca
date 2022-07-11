@@ -6,19 +6,15 @@
 @endsection
 
 @section('content')   
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
     <div class="container col-md-12">
         <div class="border shadow-lg p-3 mb-5 bg-body rounded">
             <div class="d-flex justify-content-left row col-md-12">
-                <h5 class="col-6">Nuevo local: </h5>
-                <h5 class="col-3">del comerciante:e {{ $rfc }}</h5>
-                <form class="row" action="{{ route('sLocal') }}" method="POST">
+                <h5 class="col-6">Nuevo local. </h5>
+                <h5 class="col-3">Del comerciante: {{ $rfc }}</h5>
+                
+                <form class="row" action="{{ route('sMLocal', $rfc) }}" method="POST">
                     @csrf
-                    <input type="hidden" name="cat" id="cat" value="1">
+                    <input type="hidden" name="rfc" id="rfc" value="{{ $rfc }}">
                     <div class="mb-3 col-6 border">
                         <label for="dimx" class="form-label">Dimensión X</label>
                         <input type=number step=0.01 name="dimx" autocomplete="off" autofocus="on" min=0.01
@@ -40,7 +36,7 @@
                         @enderror
                     </div>
 
-                    
+                    @if ($merchant->id_categoria == 1 )
                         <input type="hidden" id="cat" name="cat" value="1">
                         <div class="mb-3 col-12 border">
                             <label for="ubicacion" class="form-label">Ubicación</label>
@@ -56,10 +52,47 @@
                             <label for="tianguis" class="form-label">Tianguis: </label>
                             <select name="tianguis" id="tianguis" class="form-control" >
                                 @foreach ($tianguis as $tiangui)
-                                    <option value="{{ $tiangui->id_tiangui }}" > {{ $tiangui->nombre_tianguis }}</option>
+                                    @for ($i=0; $i<strlen($dias); $i++)
+                                    {
+                                        @if ($dias[$i] == $tiangui->dia)
+                                            <option value="{{ $tiangui->id_tiangui }}" > {{ $tiangui->nombre_tianguis }}</option>
+                                        @endif
+                                    }
+                                    @endfor
+                                    
+                                    
                                 @endforeach
                             </select>
                         </div>
+                    @endif
+                    @if ($merchant->id_categoria == 2)
+                        <input type="hidden" id="cat" name="cat" value="2">
+                        <div class="mb-3 col-12 border">
+                            <label for="ubicacion" class="form-label">Ubicación</label>
+                            <input type=text name="ubicacion" autocomplete="off" autofocus="on" min=0.01
+                                class="form-control text-uppercase" id="ubicacion" aria-describedby="ubiHelp" 
+                                required>
+                            <div id="ubiHelp" class="form-text">Ingresar la ubicación del local.</div>
+                            @error('ubicacion')
+                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                        
+                    @endif
+                    @if ($merchant->id_categoria == 3)
+                        <input type="hidden" id="cat" name="cat" value="3">
+                        <div class="mb-3 col-12 border">
+                            <label for="ubicacion" class="form-label">Ruta de comerciante</label>
+                            <input type=text name="ubicacion" autocomplete="off" autofocus="on" min=0.01
+                                class="form-control text-uppercase" id="ubicacion" aria-describedby="ubiHelp" 
+                                required>
+                            <div id="ubiHelp" class="form-text">Ingresar la ruta del comerciante.</div>
+                            @error('ubicacion')
+                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                    @endif
+                        
                         
                     <div class="col-12 ml-4">
                         <button type="submit" class="btn btn-primary col-3">Siguiente</button>

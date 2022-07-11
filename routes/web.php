@@ -36,9 +36,9 @@ Route::controller(MontosController::class)->group(function () {
 Route::controller(ComercianteController::class)->group(function() {
     Route::get('registrarComerciante', 'index')->name('rComerciantes');
     Route::post('guardarComerciante', 'saveMerchant')->name('gComerciantes');
-    
+    Route::get('registrarLocal/{rfc}', 'registerLocal')->name('rLocal');
+    Route::post('registrarComercianteLocal/{rfc}', 'saveMerchantLocal')->name('sMLocal');
     Route::get('listaComerciante', 'listMerchant')->name('lComerciantes');
-    Route::get('registrarLocal', 'registerLocal')->name('rLocal');
     
 });
 

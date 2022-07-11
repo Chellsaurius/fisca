@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Comerciante;
 use App\Models\Local;
+use App\Models\Registro;
 use App\Models\Tiangui;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class ComercianteController extends Controller
         //dd($request);
         $business = "";
         $days = "";
+
         $giros = $request->giro;
         $wdays = $request->dia;
         if ($request->giro != null) {
@@ -94,11 +96,18 @@ class ComercianteController extends Controller
             $merchant->save();
             
             sleep(2);
-            return redirect()->route('home')->with('message', 'El comerciante se ha agregado correctamente');
+
+            //$catMerchant = Comerciante::where('rfc', $rfc)->first();
+            //dd($catMerchant);
+            return redirect()->route('rLocal', ['rfc' => $rfc])->with('message', 'El comerciante se ha agregado correctamente');
+            
+           
         } catch (\Throwable $th) {
             //throw $th;
-            return view('home')->with('failureMerchantMsg','El comerciante no se ha sido registrado D:.', compact('th'));
+            $del = Comerciante::where('rfc',$rfc)->delete();
+            return redirect()->route('home')->with('failureMerchantMsg','El comerciante no se ha sido registrado D:.', compact('th'));
         }
+        
     
     }
 
@@ -109,8 +118,75 @@ class ComercianteController extends Controller
         return view('merchants.lComerciantes', compact('merchants'));
     }
 
-    
+    public function registerLocal($rfc) {
 
+        $merchant = Comerciante::all()->where('rfc', $rfc)->first();
+        $dias = $merchant->dias;
+        $tianguis = Tiangui::all();
+        
+       
+        return view('merchants.rLocal', compact('rfc', 'tianguis', 'merchant', 'dias'));
+
+
+    }
+
+    public function saveMerchantLocal($rfc, Request $request){
+        //dd($request, $rfc   );
+       
+        $local = new Local();
+
+        $local->dimx = $request->dimx; 
+        $local->dimy = $request->dimy; 
+        $local->ubicacion_reco = $request->ubicacion;
+        if ($request->tianguis != null) {
+            # code...
+            $tianguis = Tiangui::select('thora_inicio', 'thora_final')->where('id_tiangui', $request->tianguis)->where('estatus_tianguis', 1)->first();
+            //dd($tianguis);  
+            $local->id_tianguis = $request->tianguis;
+            $local->lhora_inicio = $tianguis->thora_inicio;
+            $local->lhora_final = $tianguis->thora_final;
+            //dd($local);
+            
+        }
+        else {
+            # code...
+            $local->id_tianguis = null;
+            $local->lhora_inicio = $request->hora_inicio;
+            $local->lhora_final = $request->thora_final;
+        }
+        
+        //dd($local);
+        try {
+                
+            $local->save();
+
+            sleep(2);
+            //dd($local);
+            $locals = Local::orderBy('id_local','desc')->first();
+            $registroComerciante = Comerciante::select('id_comerciante')->where('rfc', $rfc)->first();
+
+            $registro = new Registro();
+            $registro->id_comerciante = $registroComerciante->id_comerciante;
+            $registro->id_local = $locals->id_local;
+            //dd($registro);
+
+            $registro->save();
+            //dd($registro);
+            sleep(1);
+
+            return redirect()->route('home')->with('message', 'El local del comerciante se ha agregado correctamente');
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+            $delLocal = Local::select('id_local')->orderBy('id_local','desc')->first();
+            //dd($delLocal);
+            $delocal = Local::where('id_local', $delLocal)->delete();
+
+            $delRegis = Registro::orderBy('id_local','desc')->first();
+            $delRegi = Registro::where('id_local', $delLocal)->delete();
+            return redirect()->route('home')->with('failureMerchantMsg','El local del comerciante no se ha sido registrado D:.', compact('th'));
+        }
+    }
     
 
 }
