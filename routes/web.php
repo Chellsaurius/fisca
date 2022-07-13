@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\ComercianteController;
+use App\Http\Controllers\InspectoresController;
 use App\Http\Controllers\LocalesController;
 use App\Http\Controllers\MontosController;
+use App\Http\Controllers\PagosController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\TianguisContoller;
 use Illuminate\Support\Facades\Route;
+use Mockery\Generator\StringManipulation\Pass\Pass;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +57,21 @@ Route::controller(LocalesController::class)->group(function() {
     Route::get('nuevoLocalT', 'nuevoLocalT')->name('nLocalT');
     Route::get('nuevoLocalA', 'nuevoLocalA')->name('nLocalA');
     Route::post('guardarLocal/', 'saveLocal')->name('sLocal');
+});
+
+Route::controller(PagosController::class)->group(function() {
+    Route::get('listaPagos', 'index')->name('payment.list');
+    Route::get('nuevoPago/{rfc}', 'newPayment')->name('payment.new');
+    
+});
+
+Route::controller(InspectoresController::class)->group(function(){
+    Route::get('inspectores', 'index')->name('inspectores');
+    Route::get('nInspector', 'nInspector')->name('inspector.new');
+    Route::post('sInspector', 'saveInspector')->name('inspector.store');
+});
+
+Route::controller(PasswordController::class)->group(function() {
+    Route::get('cambiarContrasena', 'index')->name('cambiarContrasena');
+    Route::post('guardarContrasena', 'changePass')->name('guardarContrasena');
 });

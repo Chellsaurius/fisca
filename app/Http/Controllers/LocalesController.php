@@ -5,19 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Local;
 use App\Models\Tiangui;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LocalesController extends Controller
 {
     //
     public function index() {
-        $locales = Local::all()->where('status_local', 1);
+        //$locales = Local::all()->where('status_local', 1);
+       
+        $locales = DB::table('comerciantes')
+        ->join('registros', 'comerciantes.id_comerciante', '=', 'registros.id_comerciante')
+        ->join('locals', 'registros.id_local', '=', 'locals.id_local')
+        ->leftJoin('tianguis', 'tianguis.id_tiangui', '=', 'locals.id_tiangui')
+        ->select('comerciantes.*', 'locals.*', 'tianguis.*')
+        ->where('estatus_registro', 1)
+        ->get();
         //dd($locales);
         return view('locales.lLocales', compact('locales'));
     }
 
     public function nuevoLocalT(){
         $tianguis = Tiangui::all()->where('estatus_tianguis', 1);
-
         return view('locales.nLocalT', compact('tianguis'));
     }
 

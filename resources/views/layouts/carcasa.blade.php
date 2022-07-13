@@ -38,8 +38,8 @@
             <i class="fas fa-user-plus fa-2x"></i> Registar comerciante </a></li>
           <li class=""><a href="{{ route('lLocales') }}" class="text-decoration-none px-3 py-3 d-block">
             <i class="fa-solid fa-map-location fa-2x"></i></i> Locales  </a></li>
-          <li class=""><a href="#" class="text-decoration-none px-3 py-3 d-block">
-            <i class="fas fa-user-minus fa-2x"></i> Dar de baja comerciante </a></li>
+          <li class=""><a href="{{ route('payment.list') }}" class="text-decoration-none px-3 py-3 d-block">
+            <i class="fa-solid fa-file-invoice-dollar fa-2x"></i> Pagos </a></li>
           <li class=""><a href="{{ route('lComerciantes') }}" class="text-decoration-none px-3 py-3 d-block">
             <i class="fa-solid fa-users fa-2x"></i> Lista de comerciantes </a></li>
 
@@ -47,7 +47,7 @@
             <i class="fa-solid fa-user-large-slash fa-2x"></i> Apercibimientos de comerciantes </a></li>
           <li class=""><a href="#" class="text-decoration-none px-3 py-3 d-block">
             <i class="fas fa-book fa-2x"></i> Historial de locales </a></li>
-          <li class=""><a href="#" class="text-decoration-none px-3 py-3 d-block">
+          <li class=""><a href="{{ route('inspectores') }}" class="text-decoration-none px-3 py-3 d-block">
             <i class="fa-solid fa-user-secret fa-2x"></i> Inspectores </a></li>
           <li class=""><a href="{{ route('lTianguis') }}" class="text-decoration-none px-3 py-3 d-block">
             <i class="fa-solid fa-mountain-city fa-2x"></i> Tianguis </a></li>
@@ -120,12 +120,16 @@
                                   </a>
   
                                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                      <a class="dropdown-item" href="{{ route('montos') }}">Montos</a>
-  
-                                      <a class="dropdown-item" href="{{ route('logout') }}"
+                                      <a class="dropdown-item" href="{{ route ('cambiarContrasena') }}">
+                                        <i class="fa-solid fa-key"></i>Cambiar contraseña
+                                      </a>
+                                      
+                                      <a class="dropdown-item"  href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                        document.getElementById('logout-form').submit();">
+                                                       <i class="fa-solid fa-arrow-right-from-bracket"></i>
                                           {{ __('Logout') }}
+                                          
                                       </a>
                                       
                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

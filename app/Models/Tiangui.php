@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tiangui extends Model
 {
     use HasFactory;
+
+    public function locales() {
+        return $this->hasMany(Local::class, 'id_tiangui', 'id_tiangui');
+    }
 }

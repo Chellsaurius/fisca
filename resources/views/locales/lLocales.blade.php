@@ -20,15 +20,15 @@
 
         <div class="d-flex justify-content-between" >
             <a href="{{ route('nLocalT') }}" class="btn btn-secondary">Registrar nuevo local de tianguis</a>
-            <a href="{{ route('nLocalA') }}" class="btn btn-secondary">Registrar nuevo local ambulante o semi-fijo</a>
+            <!-- <a href="{{ route('nLocalA') }}" class="btn btn-secondary">Registrar nuevo local ambulante o semi-fijo</a> -->
         </div>
         <br>
 
         <table id="montos" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Dimensión X</th>
-                    <th>Dimensión Y</th>
+                    <th>Nombre</th>
+                    <th>RFC</th>
                     <th>Ubicación o recorrido</th>
                     <th>Hora de inicio</th>
                     <th>Hora de finalización</th>
@@ -40,12 +40,12 @@
                 @foreach ($locales as $local)
     
                     <tr>
-                        <td>{{ $local->dimx }}</td>
-                        <td>{{ $local->dimy }}</td>
+                        <td>{{ $local->nombre_comerciante }} {{ $local->apellido_comerciante }}</td>
+                        <td>{{ $local->rfc }}</td>
                         <td>{{ $local->ubicacion_reco }}</td>
                         <td>{{ $local->lhora_inicio }}</td>
                         <td>{{ $local->lhora_final }}</td>
-                        <td>{{ $local->id_tianguis }}</td>
+                        <td>{{ $local->nombre_tianguis }}</td>
                         
                     </tr>
                     

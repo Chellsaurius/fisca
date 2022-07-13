@@ -12,7 +12,7 @@ class MontosController extends Controller
 {
     //
     public function index (){
-        $montos = Monto::all();
+        $montos = Monto::all()->where('estatus_monto', 1);
         //dd($montos);
         return view('amounts.montos', compact('montos'));
     }

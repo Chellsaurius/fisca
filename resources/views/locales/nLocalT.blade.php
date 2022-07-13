@@ -15,7 +15,7 @@
         <div class="border shadow-lg p-3 mb-5 bg-body rounded">
             <div class="d-flex justify-content-left row col-md-12">
                 <h5 class="col-6">Nuevo local: </h5>
-                <h5 class="col-3">del comerciante:e {{ $rfc }}</h5>
+                
                 <form class="row" action="{{ route('sLocal') }}" method="POST">
                     @csrf
                     <input type="hidden" name="cat" id="cat" value="1">

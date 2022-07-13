@@ -8,6 +8,7 @@ use App\Models\Local;
 use App\Models\Registro;
 use App\Models\Tiangui;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -124,9 +125,7 @@ class ComercianteController extends Controller
         $dias = $merchant->dias;
         $tianguis = Tiangui::all();
         
-       
         return view('merchants.rLocal', compact('rfc', 'tianguis', 'merchant', 'dias'));
-
 
     }
 
@@ -174,17 +173,17 @@ class ComercianteController extends Controller
             //dd($registro);
             sleep(1);
 
-            return redirect()->route('home')->with('message', 'El local del comerciante se ha agregado correctamente');
+            return redirect()->route('payment.new',['rfc' => $rfc], compact('registro') )->with('message', 'El local del comerciante se ha agregado correctamente');
             
-        } catch (\Throwable $th) {
+        } catch (ModelNotFoundException $exception) {
             //throw $th;
             $delLocal = Local::select('id_local')->orderBy('id_local','desc')->first();
             //dd($delLocal);
             $delocal = Local::where('id_local', $delLocal)->delete();
 
             $delRegis = Registro::orderBy('id_local','desc')->first();
-            $delRegi = Registro::where('id_local', $delLocal)->delete();
-            return redirect()->route('home')->with('failureMerchantMsg','El local del comerciante no se ha sido registrado D:.', compact('th'));
+            $delRegi = Registro::where('id_local', $delRegis)->delete();
+            return redirect()->back()->withError($exception->getMessage())->withInput();
         }
     }
     
