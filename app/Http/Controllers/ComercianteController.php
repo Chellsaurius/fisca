@@ -130,18 +130,18 @@ class ComercianteController extends Controller
     }
 
     public function saveMerchantLocal($rfc, Request $request){
-        //dd($request, $rfc   );
-       
+        //dd($request, $rfc);
+        $rfc = $rfc;
         $local = new Local();
 
         $local->dimx = $request->dimx; 
         $local->dimy = $request->dimy; 
-        $local->ubicacion_reco = $request->ubicacion;
+        $local->ubicacion_reco = strtoupper($request->ubicacion);
         if ($request->tianguis != null) {
             # code...
             $tianguis = Tiangui::select('thora_inicio', 'thora_final')->where('id_tiangui', $request->tianguis)->where('estatus_tianguis', 1)->first();
             //dd($tianguis);  
-            $local->id_tianguis = $request->tianguis;
+            $local->id_tiangui = $request->tianguis;
             $local->lhora_inicio = $tianguis->thora_inicio;
             $local->lhora_final = $tianguis->thora_final;
             //dd($local);
@@ -149,7 +149,7 @@ class ComercianteController extends Controller
         }
         else {
             # code...
-            $local->id_tianguis = null;
+            $local->id_tiangui = null;
             $local->lhora_inicio = $request->hora_inicio;
             $local->lhora_final = $request->thora_final;
         }
@@ -170,10 +170,11 @@ class ComercianteController extends Controller
             //dd($registro);
 
             $registro->save();
-            //dd($registro);
+            $registros = Registro::orderBy('id_registro', 'desc')->first();
             sleep(1);
-
-            return redirect()->route('payment.new',['rfc' => $rfc], compact('registro') )->with('message', 'El local del comerciante se ha agregado correctamente');
+            //dd($registro);
+            
+            return redirect()->route('payment.new', ['rfc' => $rfc, 'registro' => $registros->id_registro])->with('message', 'El local del comerciante se ha agregado correctamente');
             
         } catch (ModelNotFoundException $exception) {
             //throw $th;

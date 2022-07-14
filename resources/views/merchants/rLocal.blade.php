@@ -19,7 +19,7 @@
                 <form class="row" action="{{ route('sMLocal', $rfc) }}" method="POST">
                     @csrf
                     <input type="hidden" name="rfc" id="rfc" value="{{ $rfc }}">
-                    <input type="hidden" id="cat" name="cat" value="{{ $merchant->id_categoria }}">
+                    
                     <div class="mb-3 col-6 border">
                         <label for="dimx" class="form-label">Dimensión X</label>
                         <input type=number step=0.01 name="dimx" autocomplete="off" autofocus="on" min=0.01
@@ -44,14 +44,14 @@
                     
                     <div class="mb-3 col-3 border" @if ($merchant->id_categoria == 1) hidden @endif>
                         <label for="IHour" class="form-label"> Selecciona la hora de inicio. </label>
-                        <input type="time" class="form-control" id="IHour" name="IHour" @if ($merchant->id_categoria == 1 ) disable @endif 
-                            aria-describedby="iHourHelp" required>
+                        <input type="time" class="form-control" id="IHour" name="IHour"  @if ($merchant->id_categoria == 1)value="00:00" disable required @endif 
+                            aria-describedby="iHourHelp" >
                         <div id="iHourHelp" class="form-text">Formato: 12 horas (07:00 a.m.). </div>
                     </div>
                     <div class="mb-3 col-3 border" @if ($merchant->id_categoria == 1) hidden @endif>
                         <label for="FHour" class="form-label"> Selecciona la hora de finalización. </label>
-                        <input type="time" class="form-control" id="FHour" name="FHour"  @if ($merchant->id_categoria == 1) disable @endif 
-                            aria-describedby="fHourHelp" required> 
+                        <input type="time" class="form-control" id="FHour" name="FHour"  @if ($merchant->id_categoria == 1)value="00:00" disable required @endif 
+                            aria-describedby="fHourHelp" > 
                         <div id="fHourHelp" class="form-text">Formato: 12 horas (04:00 p.m.).</div>
                     </div>
                     

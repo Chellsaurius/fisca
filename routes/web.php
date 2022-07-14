@@ -61,7 +61,7 @@ Route::controller(LocalesController::class)->group(function() {
 
 Route::controller(PagosController::class)->group(function() {
     Route::get('listaPagos', 'index')->name('payment.list');
-    Route::get('nuevoPago/{rfc}', 'newPayment')->name('payment.new');
+    Route::get('nuevoPago/{rfc}/{registro}', 'newPayment')->name('payment.new');
     
 });
 

@@ -21,8 +21,8 @@ return new class extends Migration
             $table->time('hora_inicio');
             $table->time('hora_final');
             $table->integer('status_local')->default('1');
-            $table->unsignedBigInteger('id_tianguis')->nullable();
-            $table->foreign('id_tianguis')->references('id_tiangui')->on('tianguis');
+            $table->unsignedBigInteger('id_tiangui')->nullable();
+            $table->foreign('id_tiangui')->references('id_tiangui')->on('tianguis');
             $table->timestamps();
         });
     }

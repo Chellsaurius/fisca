@@ -47,7 +47,7 @@ class LocalesController extends Controller
             $tianguis = Tiangui::where('id_tiangui', $request->tianguis)->first();
             $nlocal->hora_inicio = $tianguis->thora_inicio; 
             $nlocal->hora_final = $tianguis->thora_final;
-            $nlocal->id_tianguis = $tianguis->id_tiangui;
+            $nlocal->id_tiangui = $tianguis->id_tiangui;
             //dd($local);
         }
         if ($request->cat == 2 || $request->cat == 3)
