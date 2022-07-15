@@ -62,6 +62,7 @@ Route::controller(LocalesController::class)->group(function() {
 Route::controller(PagosController::class)->group(function() {
     Route::get('listaPagos', 'index')->name('payment.list');
     Route::get('nuevoPago/{rfc}/{registro}', 'newPayment')->name('payment.new');
+    Route::post('guardarPago', 'savePayment')->name('payment.save');
     
 });
 
