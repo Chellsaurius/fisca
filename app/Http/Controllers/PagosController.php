@@ -8,6 +8,7 @@ use App\Models\Monto;
 use App\Models\Pago;
 use App\Models\Registro;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class PagosController extends Controller
@@ -22,8 +23,7 @@ class PagosController extends Controller
     public function newPayment($rfc, $registro) {
         //dd($rfc, $registro);
         $merchant = Comerciante::all()->where('rfc', $rfc)->where('estatus_comerciante', 1)->first();
-        $contador = strlen($merchant->dias);
-        $contador = $contador/2;
+        
         $merchant->dias = str_replace("1","LUNES", $merchant->dias);
         $merchant->dias = str_replace("2","MARTES", $merchant->dias);
         $merchant->dias = str_replace("3","MIÉRCOLES", $merchant->dias);
@@ -40,30 +40,105 @@ class PagosController extends Controller
         $fModificada = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ahorita)->format('Y');
         $monto = Monto::orderBy('id_montos', 'desc')->where('year', $fModificada)->first();
         //dd($merchant, $registration, $local);
-        $total = $contador * $local->dimx * $local->dimy * $monto->monto;
-        $today = today(); 
-        $dates = []; 
-
-        for($i=1; $i < $today->daysInMonth + 1; ++$i) {
-            $dates[] = \Carbon\Carbon::createFromDate($today->year, $today->month, $i)->format('F-d-Y');
-        }
-        //dd($today, $dates);
-
+        $total = 1 * $local->dimx * $local->dimy * $monto->monto;
+       
+        //dd($today, $dates,  );
+        
         return view('payments/nPayment', ['rfc' => $rfc, 'registro' => $registration->id_registro])
-            ->with(compact('merchant', 'registration', 'local', 'contador', 'monto', 'total'));
+            ->with(compact('merchant', 'registration', 'local', 'monto', 'total'));
     }
 
     public function savePayment(Request $request) {
 
-        $total = 0;
-        for ($i=$request->IDatePayment; $i < $request->FDateTianguis; $i++) { 
-            # code...
-            /*if (date('N', $i) == 1 || date('N', $i) == 2) {
-                $total++;
-            }*/
-            $total++;
+        $merchant = Comerciante::all()->where('rfc', $request->rfc)->where('estatus_comerciante', 1)->first();
+        //dd($request, $merchant);
+        $contador = strlen($merchant->dias);
+        $dias = $merchant->dias;
+        
+        $dia = ["","","","","","",""];
+        $counter = 0;
+
+        for ($i=0; $i < $contador; $i++) { 
+            
+            if($i%2 == 0) {
+                $dia[$counter] = $dias[$i];
+                $counter++;
+            }  
+           
         }
-        $demo = date('N');
-        dd($request, $total, $demo);
+
+        $count = 0;
+        $startDate = \Carbon\Carbon::parse($request->IDatePayment); 
+        $endDate = \Carbon\Carbon::parse($request->FDatePayment);
+       
+        $interval = $startDate->diff($endDate);
+        $numberOfDays = $interval->format('%d');
+
+        for ($j=1; $j <= $numberOfDays; $j++) { 
+            # code...
+            if ($startDate->format('N') == $dia[0]) {
+                # code...
+                $count++;
+            }
+            if ($startDate->format('N') == $dia[1]) {
+                # code...
+                $count++;
+            }
+            if ($startDate->format('N') == $dia[2]) {
+                # code...
+                $count++;
+            }
+            if ($startDate->format('N') == $dia[3]) {
+                # code...
+                $count++;
+            }
+            if ($startDate->format('N') == $dia[4]) {
+                # code...
+                $count++;
+            }
+            if ($startDate->format('N') == $dia[5]) {
+                # code...
+                $count++;
+            }
+            if ($startDate->format('N') == $dia[6]) {
+                # code...
+                $count++;
+            }
+
+            $startDate->modify("+1 days");
+        }
+
+        $total = $request->value * $count;
+        round($total, 2);
+        number_format((float)$total, 2, '.', '',);
+        
+        $pago = new Pago();
+        $pago->folio = $request->folio;
+        $pago->fecha_inicio = $request->IDatePayment;
+        $pago->fecha_final = $request->fDatePayment;
+        $pago->rfc = $request->rfc;
+        $pago->monto = $total;
+        $pago->dias_laborales = $count;
+        $pago->id_comerciante = $request->id_comerciante;
+        $pago->id_local = $request->id_local;
+
+        try {
+            
+            //code...
+            $pago->save();
+            sleep(2);
+
+            return redirect()->route('home')->with('message', 'El pago del comerciante se ha agregado correctamente.');;
+
+        } catch (ModelNotFoundException $exception) {
+            //throw $th;
+            $delPago = Pago::select('id_pago')->orderBy('id_pago', 'desc')->first();
+            $delPago = Pago::where('id_pago', $delPago)->delete();
+
+            return redirect()->back()->withErrors($exception->getMessage())->withInput();
+        }
+
+    
+        dd($request, $dia, $count, $total);
     }
 }

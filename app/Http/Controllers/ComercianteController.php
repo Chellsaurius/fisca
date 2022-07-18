@@ -126,7 +126,6 @@ class ComercianteController extends Controller
         $tianguis = Tiangui::all();
         
         return view('merchants.rLocal', compact('rfc', 'tianguis', 'merchant', 'dias'));
-
     }
 
     public function saveMerchantLocal($rfc, Request $request){
@@ -174,7 +173,7 @@ class ComercianteController extends Controller
             sleep(1);
             //dd($registro);
             
-            return redirect()->route('payment.new', ['rfc' => $rfc, 'registro' => $registros->id_registro])->with('message', 'El local del comerciante se ha agregado correctamente');
+            return redirect()->route('payment.new', ['rfc' => $rfc, 'registro' => $registros->id_registro])->with('message', 'El local del comerciante se ha agregado correctamente.');
             
         } catch (ModelNotFoundException $exception) {
             //throw $th;
