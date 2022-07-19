@@ -32,7 +32,7 @@ class PagosController extends Controller
         $merchant->dias = str_replace("6","SÁBADO", $merchant->dias);
         $merchant->dias = str_replace("7","DOMINGO", $merchant->dias);
         $merchant->dias = substr($merchant->dias, 0, -1);
-        $merchant->giro = substr($merchant->giro, 0, -1);
+        //$merchant->giro = substr($merchant->giro, 0, -1);
         $registration = Registro::all()->where('id_registro', $registro)->where('estatus_registro', 1)->first();
         $local = Local::all()->where('id_local', $registration->id_local)->where('status_local', 1)->first();
         
@@ -52,6 +52,8 @@ class PagosController extends Controller
 
         $merchant = Comerciante::all()->where('rfc', $request->rfc)->where('estatus_comerciante', 1)->first();
         //dd($request, $merchant);
+
+        /*
         $contador = strlen($merchant->dias);
         $dias = $merchant->dias;
         
@@ -60,11 +62,10 @@ class PagosController extends Controller
 
         for ($i=0; $i < $contador; $i++) { 
             
-            if($i%2 == 0) {
-                $dia[$counter] = $dias[$i];
+            if($i%2 == 0) {         //esta parte es para preparar el conteido del arreglo quitando las comas 
+                $dia[$counter] = $dias[$i];     //ya que el arreglo viene 1,2,3,4 si deja residio de la división con 2 se quita
                 $counter++;
             }  
-           
         }
 
         $count = 0;
@@ -111,14 +112,14 @@ class PagosController extends Controller
         $total = $request->value * $count;
         round($total, 2);
         number_format((float)$total, 2, '.', '',);
-        
+        */
         $pago = new Pago();
         $pago->folio = $request->folio;
         $pago->fecha_inicio = $request->IDatePayment;
-        $pago->fecha_final = $request->fDatePayment;
+        $pago->fecha_final = $request->FDatePayment;
         $pago->rfc = $request->rfc;
-        $pago->monto = $total;
-        $pago->dias_laborales = $count;
+        $pago->monto = $request->total;
+        $pago->dias_laborales = $request->dWorked;
         $pago->id_comerciante = $request->id_comerciante;
         $pago->id_local = $request->id_local;
 
@@ -138,7 +139,5 @@ class PagosController extends Controller
             return redirect()->back()->withErrors($exception->getMessage())->withInput();
         }
 
-    
-        dd($request, $dia, $count, $total);
     }
 }

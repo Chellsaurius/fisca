@@ -44,8 +44,8 @@
                         <td>{{ $merchant->domicilio }}</td>
                         <td>{{ $merchant->telefono1 }}</td>
                         <td>{{ $merchant->telefono2 }}</td>
-                        <td>{{ $merchant->giro }}</td>
-                        <td>{{ $merchant->dias }}</td>
+                        <td>{{ trim($merchant->giro, ',') }}</td>
+                        <td>{{ trim($merchant->dias, ',') }}</td>
                         <td>{{ $merchant->apercibimientos }}</td>
                         <td>{{ $merchant->categoria->clase }}</td>
                         <td>

@@ -27,8 +27,8 @@
                     <th>RFC</th>
                     <th>Inicio de contrato</th>
                     <th>Fin de contrato</th>
-                    <th>Cantidad a cobrar</th>
-                    <th>Días Laborales</th>
+                    <th>Días laborados</th>
+                    <th>Cantidad cobrada</th>
                     <th>Ubicación</th>
                     <th>Dimención X</th>
                     <th>Dimención Y</th>
@@ -38,16 +38,16 @@
                 @foreach ($payments as $payment)
     
                     <tr>
-                        <td>{{ $payment->nombre_comerciante }}</td>
-                        <td>{{ $payment->apellido_comerciante }}</td>
-                        <td>{{ $payment->rfc }}</td>
-                        <td>{{ $payment->domicilio }}</td>
-                        <td>{{ $payment->telefono1 }}</td>
-                        <td>{{ $payment->telefono2 }}</td>
-                        <td>{{ $payment->giro }}</td>
-                        <td>{{ $payment->dias }}</td>
-                        <td>{{ $payment->apercibimientos }}</td>
-                        <td>{{ $payment->categoria->clase }}</td>
+                        <td>{{ $payment->folio }}</td>
+                        <td>{{ $payment->comerciante->nombre_comerciante }} {{ $payment->comerciante->apellido_comerciante }}</td>
+                        <td>{{ $payment->comerciante->rfc }}</td>
+                        <td>{{ $payment->fecha_inicio }}</td>
+                        <td>{{ $payment->fecha_final }}</td>
+                        <td>{{ $payment->dias_laborales }}</td>
+                        <td>{{ $payment->monto }}</td>
+                        <td>{{ $payment->local->ubicacion_reco }}</td>
+                        <td>{{ $payment->local->dimx }}</td>
+                        <td>{{ $payment->local->dimy }}</td>
                         <td></td>
                     </tr>
                     

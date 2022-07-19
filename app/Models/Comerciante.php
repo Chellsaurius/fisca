@@ -12,4 +12,10 @@ class Comerciante extends Model
     public function categoria() {
         return $this->belongsTo(Categoria::class,'id_categoria', 'id_categoria');
     }
+
+    public function pago() {
+        return $this->hasMany(Pago::class, 'id_comerciante', 'id_comerciante');
+    }
+
+    
 }
