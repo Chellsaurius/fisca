@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tianguis', function (Blueprint $table) {
-            $table->id('id_tiangui');
+            $table->id('id_tianguis');
             $table->string('nombre_tianguis');
             $table->integer('dia');
-            $table->string('horario');
-            $table->integer('estatus_tianguis')->default('1');
+            $table->time('thora_inicio');
+            $table->time('thora_final');
+            $table->integer('estatus_tianguis')->default('1')->comment('1 = activo, 2 = inactivo');
             $table->timestamps();
         });
     }

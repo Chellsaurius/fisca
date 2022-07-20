@@ -109,12 +109,11 @@ class ComercianteController extends Controller
             return redirect()->route('home')->with('failureMerchantMsg','El comerciante no se ha sido registrado D:.', compact('th'));
         }
         
-    
     }
 
     public function listMerchant(){
         $merchants = Comerciante::all()->where('estatus_comerciante', 1);
-        $locals = Local::all();
+        //$locals = Local::all();
         // dd($locals);
         return view('merchants.lComerciantes', compact('merchants'));
     }

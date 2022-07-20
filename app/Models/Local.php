@@ -12,4 +12,8 @@ class Local extends Model
     public function tiangui() {
         return $this->belongsTo(Tiangui::class, 'id_tiangui', 'id_tiangui');
     }
+
+    public function pago() {
+        return $this->hasMany(Pago::class, 'id_local', 'id_local');
+    }
 }

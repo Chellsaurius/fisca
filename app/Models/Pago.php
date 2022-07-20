@@ -12,4 +12,8 @@ class Pago extends Model
     public function comerciante() {
         return $this->belongsTo(Comerciante::class,'id_comerciante', 'id_comerciante');
     }
+
+    public function local() {
+        return $this->belongsTo(Local::class, 'id_local', 'id_local');
+    }
 }

@@ -18,11 +18,11 @@ return new class extends Migration
             $table->float('dimx', 8, 2);
             $table->float('dimy', 8 ,2);
             $table->text('ubicacion_reco');
-            $table->time('hora_inicio');
-            $table->time('hora_final');
-            $table->integer('status_local')->default('1');
-            $table->unsignedBigInteger('id_tiangui')->nullable();
-            $table->foreign('id_tiangui')->references('id_tiangui')->on('tianguis');
+            $table->time('lhora_inicio');
+            $table->time('lhora_final');
+            $table->integer('status_local')->default('1')->comment('1 = activo, 2 = inactivo');
+            $table->unsignedBigInteger('id_tianguis')->nullable();
+            $table->foreign('id_tianguis')->references('id_tianguis')->on('tianguis');
             $table->timestamps();
         });
     }

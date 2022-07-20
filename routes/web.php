@@ -63,6 +63,8 @@ Route::controller(PagosController::class)->group(function() {
     Route::get('listaPagos', 'index')->name('payment.list')->middleware('auth');
     Route::get('nuevoPago/{rfc}/{registro}', 'newPayment')->name('payment.new')->middleware('auth');
     Route::post('guardarPago', 'savePayment')->name('payment.save')->middleware('auth');
+    Route::get('localesPago/{rfc}', 'localsPayment')->name('payment.locals')->middleware('auth');
+    //Route::get('nuevoAdeudoPago/{rfc}', 'newDuePayment')->name('payment.due')->middleware('auth');
     
 });
 

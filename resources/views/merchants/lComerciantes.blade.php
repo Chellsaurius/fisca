@@ -22,7 +22,6 @@
             <thead>
                 <tr>
                     <th>Nombre(s)</th>
-                    <th>Apellidos</th>
                     <th>RFC</th>
                     <th>Domicilio</th>
                     <th>Teléfono 1</th>
@@ -38,8 +37,7 @@
                 @foreach ($merchants as $merchant)
     
                     <tr>
-                        <td>{{ $merchant->nombre_comerciante }}</td>
-                        <td>{{ $merchant->apellido_comerciante }}</td>
+                        <td>{{ $merchant->nombre_comerciante }} {{ $merchant->apellido_comerciante }}</td>
                         <td>{{ $merchant->rfc }}</td>
                         <td>{{ $merchant->domicilio }}</td>
                         <td>{{ $merchant->telefono1 }}</td>
@@ -50,39 +48,16 @@
                         <td>{{ $merchant->categoria->clase }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('rLocal', $merchant->rfc) }}">Registrar un local</a>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $merchant->rfc }}">
-                                Launch demo modal
-                              </button>
+
+                            <a class="btn btn-primary" href="{{ route('payment.locals', $merchant->rfc ) }}">Refrendos</a>
+                            
                         </td>
                     </tr>
                     
-                
                 @endforeach
     
-                
             </tbody>
         </table>
-
-        @foreach ($merchants as $merchant)
-            <div class="modal fade" id="exampleModal{{ $merchant->rfc }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Modal title {{ $merchant->rfc }}</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  ...
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endforeach
-        
 
         @section('js')
         <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>

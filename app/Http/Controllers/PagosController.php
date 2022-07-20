@@ -10,12 +10,14 @@ use App\Models\Registro;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PagosController extends Controller
 {
     //
     public function index() {
-        $payments = Pago::all();
+        $payments = Pago::all()->where('estatus_pago', 1);
+        //$merchants = Comerciante::all()->where('estatus_comerciante', 1);
 
         return view('payments.lPayments', compact('payments'));
     }
@@ -129,7 +131,7 @@ class PagosController extends Controller
             $pago->save();
             sleep(2);
 
-            return redirect()->route('home')->with('message', 'El pago del comerciante se ha agregado correctamente.');;
+            return redirect()->route('home')->with('message', 'El pago del comerciante se ha agregado correctamente.');
 
         } catch (ModelNotFoundException $exception) {
             //throw $th;
@@ -139,5 +141,27 @@ class PagosController extends Controller
             return redirect()->back()->withErrors($exception->getMessage())->withInput();
         }
 
+    }
+
+    public function localsPayment ($rfc) {
+        //dd($rfc);
+
+        $locales = DB::table('comerciantes')
+            ->join('registros', 'comerciantes.id_comerciante', '=', 'registros.id_comerciante')
+            ->join('locals', 'registros.id_local', '=', 'locals.id_local')
+            ->leftJoin('tianguis', 'tianguis.id_tiangui', '=', 'locals.id_tiangui')
+            ->select('comerciantes.*', 'locals.*', 'tianguis.*')
+            ->where('estatus_registro', 1)
+            ->where('rfc', $rfc)
+            ->get();
+        //dd($locales);
+
+       
+            
+        
+        return view('payments.dPayments',  ['rfc' => $rfc])->with(compact('locales'));
+        //return view('payments/DPayments', ['rfc' => $rfc, 'registro' => $registration->id_registro])
+        //    ->with(compact('merchant', 'registration', 'local', 'monto', 'total'));
+        //return view('merchants.rComerciantes', compact('types'));
     }
 }

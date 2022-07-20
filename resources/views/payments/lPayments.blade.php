@@ -48,7 +48,6 @@
                         <td>{{ $payment->local->ubicacion_reco }}</td>
                         <td>{{ $payment->local->dimx }}</td>
                         <td>{{ $payment->local->dimy }}</td>
-                        <td></td>
                     </tr>
                     
                 

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->integer('role')->default('2');
-            $table->integer('estatus_user')->default('1');
+            $table->integer('estatus_user')->default('1')->comment('1 = activo, 2 = inactivo');
             $table->timestamps();
         });
     }

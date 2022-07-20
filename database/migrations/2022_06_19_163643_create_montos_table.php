@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id('id_montos');
             $table->float('monto', 8, 2);
             $table->integer('year');
-            $table->integer('estatus_monto')->default('1');;
+            $table->integer('estatus_monto')->default('1')->comment('1 = activo, 2 = inactivo');
             $table->timestamps();
         });
     }

@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('registros', function (Blueprint $table) {
-            $table->integer('estatus_registro')->default('1');
+            $table->id('id_registro');
+            $table->integer('estatus_registro')->default('1')->comment('1 = activo, 2 = inactivo');
             $table->unsignedBigInteger('id_comerciante')->nullable();
             $table->foreign('id_comerciante')->references('id_comerciante')->on('comerciantes');
             $table->unsignedBigInteger('id_local')->nullable();

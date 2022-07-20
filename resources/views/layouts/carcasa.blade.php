@@ -22,7 +22,7 @@
       <div class="sidebar" id="side_nav">
         <div class="header-box px-2 pt-3 pb-1 d-flex justify-content-between">
           <h1 class="fs-4"> 
-            <span class="bg-white text-dark rounded shadow px-2 me-2">Fiscalización</span>
+            <span class="bg-white text-dark rounded shadow px-2 me-2">SIRECO</span>
           </h1>
           
           <hr class="h.color mx-2">
