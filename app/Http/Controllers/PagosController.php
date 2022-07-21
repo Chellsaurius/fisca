@@ -149,7 +149,7 @@ class PagosController extends Controller
         $locales = DB::table('comerciantes')
             ->join('registros', 'comerciantes.id_comerciante', '=', 'registros.id_comerciante')
             ->join('locals', 'registros.id_local', '=', 'locals.id_local')
-            ->leftJoin('tianguis', 'tianguis.id_tiangui', '=', 'locals.id_tiangui')
+            ->leftJoin('tianguis', 'tianguis.id_tianguis', '=', 'locals.id_tianguis')
             ->select('comerciantes.*', 'locals.*', 'tianguis.*')
             ->where('estatus_registro', 1)
             ->where('rfc', $rfc)

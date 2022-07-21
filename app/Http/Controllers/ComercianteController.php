@@ -123,7 +123,7 @@ class ComercianteController extends Controller
         $merchant = Comerciante::all()->where('rfc', $rfc)->first();
         $dias = $merchant->dias;
         $tianguis = Tiangui::all();
-        
+        //dd($tianguis);
         return view('merchants.rLocal', compact('rfc', 'tianguis', 'merchant', 'dias'));
     }
 
@@ -137,9 +137,9 @@ class ComercianteController extends Controller
         $local->ubicacion_reco = strtoupper($request->ubicacion);
         if ($request->tianguis != null) {
             # code...
-            $tianguis = Tiangui::select('thora_inicio', 'thora_final')->where('id_tiangui', $request->tianguis)->where('estatus_tianguis', 1)->first();
+            $tianguis = Tiangui::select('thora_inicio', 'thora_final')->where('id_tianguis', $request->tianguis)->where('estatus_tianguis', 1)->first();
             //dd($tianguis);  
-            $local->id_tiangui = $request->tianguis;
+            $local->id_tianguis = $request->tianguis;
             $local->lhora_inicio = $tianguis->thora_inicio;
             $local->lhora_final = $tianguis->thora_final;
             //dd($local);
@@ -147,9 +147,9 @@ class ComercianteController extends Controller
         }
         else {
             # code...
-            $local->id_tiangui = null;
-            $local->lhora_inicio = $request->hora_inicio;
-            $local->lhora_final = $request->thora_final;
+            $local->id_tianguis = null;
+            $local->lhora_inicio = $request->IHour;
+            $local->lhora_final = $request->FHour;
         }
         
         //dd($local);

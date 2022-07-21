@@ -56,7 +56,7 @@
                             <label for="tianguis" class="form-label">Tianguis: </label>
                             <select name="tianguis" id="tianguis" class="form-control" >
                                 @foreach ($tianguis as $tiangui)
-                                    <option value="{{ $tiangui->id_tiangui }}" > {{ $tiangui->nombre_tianguis }}</option>
+                                    <option value="{{ $tiangui->id_tianguis }}" > {{ $tiangui->nombre_tianguis }}</option>
                                 @endforeach
                             </select>
                         </div>

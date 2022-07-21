@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('locales', function (Blueprint $table) {
+        Schema::create('locals', function (Blueprint $table) {
             $table->id('id_local');
             $table->float('dimx', 8, 2);
             $table->float('dimy', 8 ,2);

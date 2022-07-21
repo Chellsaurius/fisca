@@ -16,7 +16,7 @@ class LocalesController extends Controller
         $locales = DB::table('comerciantes')
         ->join('registros', 'comerciantes.id_comerciante', '=', 'registros.id_comerciante')
         ->join('locals', 'registros.id_local', '=', 'locals.id_local')
-        ->leftJoin('tianguis', 'tianguis.id_tiangui', '=', 'locals.id_tiangui')
+        ->leftJoin('tianguis', 'tianguis.id_tianguis', '=', 'locals.id_tianguis')
         ->select('comerciantes.*', 'locals.*', 'tianguis.*')
         ->where('estatus_registro', 1)
         ->get();
@@ -44,10 +44,10 @@ class LocalesController extends Controller
         $nlocal->ubicacion_reco = $request->ubicacion;
         if ($request->cat == 1) {
             # code...
-            $tianguis = Tiangui::where('id_tiangui', $request->tianguis)->first();
+            $tianguis = Tiangui::where('id_tianguis', $request->tianguis)->first();
             $nlocal->hora_inicio = $tianguis->thora_inicio; 
             $nlocal->hora_final = $tianguis->thora_final;
-            $nlocal->id_tiangui = $tianguis->id_tiangui;
+            $nlocal->id_tianguis = $tianguis->id_tianguis;
             //dd($local);
         }
         if ($request->cat == 2 || $request->cat == 3)

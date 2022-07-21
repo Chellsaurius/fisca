@@ -3,7 +3,7 @@
 @section('content')
     @section('title')
         <h1>Registrar comerciantes</h1>
-        <title>Carcase</title>
+        <title>Registo del comerciante</title>
     @endsection
     <div class="container">
         <div class="border shadow-lg p-3 mb-5 bg-body rounded">
@@ -180,7 +180,7 @@
                                     <input type="checkbox" value="otros" class="form-check-input m-1 @error('otros') is-invalid @enderror" id="otros" >
                                     <label class="form-label" for="otros">Otros</label>
                                     <input type="text" name="otrosg" class="form-control text-uppercase" id="otrosg" aria-describedby="giroHelp" disabled>
-                                    <div id="giroHelp" class="form-text">Ingrese el o los giros del comerciante si no están en la parte de arriba, separados por "," sin "Y" al final.</div>
+                                    <div id="giroHelp" class="form-text">Ingrese el o los giros del comerciante si no están en la parte de arriba, separados por "," sin "Y" al final (esto y lo otro).</div>
                                 </div>
                                 
                             </div>

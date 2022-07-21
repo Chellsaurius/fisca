@@ -10,7 +10,7 @@ class Local extends Model
     use HasFactory;
 
     public function tiangui() {
-        return $this->belongsTo(Tiangui::class, 'id_tiangui', 'id_tiangui');
+        return $this->belongsTo(Tiangui::class, 'id_tianguis', 'id_tianguis');
     }
 
     public function pago() {

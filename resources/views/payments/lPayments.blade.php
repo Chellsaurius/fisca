@@ -23,7 +23,7 @@
             <thead>
                 <tr>
                     <th>Folio</th>
-                    <th>Nombre </th>
+                    <th>Nombres </th>
                     <th>RFC</th>
                     <th>Inicio de contrato</th>
                     <th>Fin de contrato</th>

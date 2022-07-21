@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('telefono2')->nullable();
             $table->string('giro');
             $table->string('dias');
-            $table->text('observaciones');
+            $table->text('observaciones')->nullable();
             $table->integer('apercibimientos')->default('0');
             $table->integer('estatus_comerciante')->default('1')->comment('1 = activo, 2 = inactivo');
             $table->unsignedBigInteger('id_user')->nullable();

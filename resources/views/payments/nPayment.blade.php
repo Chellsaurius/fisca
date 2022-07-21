@@ -10,7 +10,7 @@
     <div class="container">
         <div class=" shadow-lg p-3 mb-5 bg-body rounded">
             @if(session()->has('message'))
-                <div class="alert alert-danger">
+                <div class="alert alert-sucess">
                     {{ session()->get('message') }}
                 </div>
             @endif
@@ -89,7 +89,7 @@
                         
                     </div>
                     <div class="mb-3 col-3 border">
-                        <label for="cost" class="form-label">Valor del m^2.</label>
+                        <label for="cost" class="form-label">Valor del m^2. $</label>
                         <input type="text" name="cost" class="form-control" id="cost" value="{{ $monto->monto }}" aria-describedby="costHelp" disabled>
                         <div id="costHelp" class="form-text">Costo del m^2 del año fiscal en curso. </div>
                     </div>
@@ -100,7 +100,7 @@
                     </div>
                     
                     <div class="mb-3 col-3 border">
-                        <label for="value" class="form-label">Cantidad del pago por los día</label>
+                        <label for="value" class="form-label">Cantidad del pago por los día. $</label>
                         $<input type="text" name="value" class="form-control" id="value" value="{{ $total }}" aria-describedby="valueHelp" readonly>
                         <div id="valueHelp" class="form-text">Cantidad que el ciudadano va a pagar. </div>
                         

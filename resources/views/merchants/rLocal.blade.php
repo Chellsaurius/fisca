@@ -88,7 +88,7 @@
                                 @for ($i=0; $i<strlen($dias); $i++)
                                 {
                                     @if ($dias[$i] == $tiangui->dia)
-                                        <option value="{{ $tiangui->id_tiangui }}" > {{ $tiangui->nombre_tianguis }}</option>
+                                        <option value="{{ $tiangui->id_tianguis }}" > {{ $tiangui->nombre_tianguis }}</option>
                                     @endif
                                 }
                                 @endfor
