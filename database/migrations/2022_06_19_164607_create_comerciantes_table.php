@@ -20,11 +20,11 @@ return new class extends Migration
             $table->string('rfc');
             $table->string('domicilio');
             $table->string('telefono1');
-            $table->string('telefono2');
+            $table->string('telefono2')->nullable();
             $table->string('giro');
             $table->string('dias');
             $table->text('observaciones');
-            $table->integer('apercibimientos');
+            $table->integer('apercibimientos')->default('0');
             $table->integer('estatus_comerciante')->default('1')->comment('1 = activo, 2 = inactivo');
             $table->unsignedBigInteger('id_user')->nullable();
             $table->foreign('id_user')->references('id')->on('users');
