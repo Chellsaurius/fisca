@@ -104,6 +104,10 @@
                 </form>
             </div>
         </div>
+        
+         <div id="derecha" style="width: 349px; float:right; height:220px;">
+            <img src="data:image/png;base64, {{ base64_encode(QrCode::format('png')->backgroundColor(204,255,229)->size(200)->generate('http://localhost:8000'.'/'.@$rfc)) }} ">
+        </div>
     </div>
 
 @endsection
