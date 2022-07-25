@@ -162,7 +162,7 @@
                     //define two date object variables to store the date values  
                     var date1 = new Date(dateI1);  
                     var date2 = new Date(dateI2);  
-                
+                    
                     //calculate time difference  
                     var time_difference = date2.getTime() - date1.getTime();  
             

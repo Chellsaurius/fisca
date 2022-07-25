@@ -156,10 +156,11 @@ class PagosController extends Controller
             ->get();
         //dd($locales);
 
-       
+
+
+        $monto = Monto::all();
             
-        
-        return view('payments.dPayments',  ['rfc' => $rfc])->with(compact('locales'));
+        return view('payments.dPayments',  ['rfc' => $rfc])->with(compact('locales', 'monto'));
         //return view('payments/DPayments', ['rfc' => $rfc, 'registro' => $registration->id_registro])
         //    ->with(compact('merchant', 'registration', 'local', 'monto', 'total'));
         //return view('merchants.rComerciantes', compact('types'));
