@@ -47,7 +47,7 @@
                     </div>
                     <div class="mb-3 col-2 border">
                         <label for="folio" class="form-label">Folio</label>
-                        <input type="text" name="folio" class="form-control" id="folio" aria-describedby="folioHelp" required>
+                        <input type="text" name="folio" class="form-control" id="folio" aria-describedby="folioHelp" >
                         <div id="folioHelp" class="form-text">Folio del pago.</div>
                         @error('folio')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -101,7 +101,7 @@
                     
                     <div class="mb-3 col-3 border">
                         <label for="value" class="form-label">Cantidad del pago por los día. $</label>
-                        $<input type="text" name="value" class="form-control" id="value" value="{{ $total }}" aria-describedby="valueHelp" readonly>
+                        <input type="text" name="value" class="form-control" id="value" value="{{ $total }}" aria-describedby="valueHelp" readonly>
                         <div id="valueHelp" class="form-text">Cantidad que el ciudadano va a pagar. </div>
                         
                     </div>

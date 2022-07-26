@@ -45,8 +45,8 @@
 
           <li class=""><a href="#" class="text-decoration-none px-3 py-3 d-block">
             <i class="fa-solid fa-user-large-slash fa-2x"></i> Apercibimientos de comerciantes </a></li>
-          <li class=""><a href="#" class="text-decoration-none px-3 py-3 d-block">
-            <i class="fas fa-book fa-2x"></i> Historial de locales </a></li>
+          <li class=""><a href="{{ route('payments.pending') }}" class="text-decoration-none px-3 py-3 d-block">
+            <i class="fas fa-book fa-2x"></i> Pagos pendientes </a></li>
           <li class=""><a href="{{ route('inspectores') }}" class="text-decoration-none px-3 py-3 d-block">
             <i class="fa-solid fa-user-secret fa-2x"></i> Inspectores </a></li>
           <li class=""><a href="{{ route('lTianguis') }}" class="text-decoration-none px-3 py-3 d-block">

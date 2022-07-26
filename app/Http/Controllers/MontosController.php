@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Monto;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DB;
 
 use function PHPUnit\Framework\returnArgument;
 
@@ -12,7 +13,7 @@ class MontosController extends Controller
 {
     //
     public function index (){
-        $montos = Monto::all()->where('estatus_monto', 1);
+        $montos = Monto::all();
         //dd($montos);
         return view('amounts.montos', compact('montos'));
     }
@@ -42,5 +43,21 @@ class MontosController extends Controller
 
     public function nmonto(){
         return view('amounts.nmonto');
+    }
+
+    public function activateMonto($id)
+    {
+        # code...
+        //dd($id);
+        $affected = DB::table('montos')
+            ->update(['estatus_monto' => 0]);
+
+        $affected = DB::table('montos')
+            ->where('id_montos', $id)
+            ->update(['estatus_monto' => 1]);
+
+        $montos = Monto::all();
+
+        return redirect()->route('montos', compact('montos'))->with('message', 'Monto agregado correctamente');
     }
 }

@@ -6,8 +6,8 @@
 @endsection
 
 @section('title')
-    <H1>Lista de locales del comerciante</H1>
-    <title>Locales del comerciante</title>
+    <H1>Lista de pagos pendientes</H1>
+    <title>Pagos pendientes</title>
 @endsection
 
 @section('content')    
@@ -17,61 +17,49 @@
                 {{ session()->get('message') }}
             </div>
         @endif
-  
-        <div class="d-flex justify-content-between" >
-            <h2 class="text-start align-items-start">Locales  del comerciante con RFC: {{ $rfc }}</h2>
-        </div>
-        
-        <br>
+
 
         <table id="montos" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>Ubicación o recorrido</th>
-                    <th>Hora de inicio</th>
-                    <th>Hora de finalización</th>
-                    <th>Tianguis</th>
+                    <th>Folio</th>
+                    <th>Nombres </th>
+                    <th>RFC</th>
+                    <th>Inicio de contrato</th>
+                    <th>Fin de contrato</th>
+                    <th>Días laborados</th>
+                    <th>Cantidad cobrada</th>
+                    <th>Ubicación</th>
+                    <th>Dimención X</th>
+                    <th>Dimención Y</th>
                     <th>Acciones</th>
-                    
                 </tr>
             </thead>
             <tbody>
-                @if ($comerciante->id_categoria == 1)
-                    @foreach ($locales as $local)
-                        <tr>
-                            <td>{{ $local->ubicacion_reco }}</td>
-                            <td>{{ $local->lhora_inicio }}</td>
-                            <td>{{ $local->lhora_final }}</td>
-                            <td>{{ $local->nombre_tianguis ?? 'No afiliado a un tianguis' }}</td>
-                            <td>
-                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pagarModal{{ $local->id_local }}">
-                                    Pagar local: {{ $local->id_local }}
-                                </a>
-                            </td>
-                        </tr>
-                        @include('modal.mPayment')
-                    @endforeach
-                @else
+                @foreach ($payments as $payment)
+    
                     <tr>
-                        <td>{{ $locales->ubicacion_reco }}</td>
-                        <td>{{ $locales->lhora_inicio }}</td>
-                        <td>{{ $locales->lhora_final }}</td>
-                        <td>{{ $locales->nombre_tianguis ?? 'No afiliado a un tianguis' }}</td>
-                        <td>
-                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pagarModalotros{{ $locales->id_local }}">
-                                Pagar local: {{ $locales->id_local }}
-                            </a>
-                        </td>
+                        <td>{{ $payment->folio }}</td>
+                        <td>{{ $payment->comerciante->nombre_comerciante }} {{ $payment->comerciante->apellido_comerciante }}</td>
+                        <td>{{ $payment->comerciante->rfc }}</td>
+                        <td>{{ $payment->fecha_inicio }}</td>
+                        <td>{{ $payment->fecha_final }}</td>
+                        <td>{{ $payment->dias_laborales }}</td>
+                        <td>{{ $payment->monto }}</td>
+                        <td>{{ $payment->local->ubicacion_reco }}</td>
+                        <td>{{ $payment->local->dimx }}</td>
+                        <td>{{ $payment->local->dimy }}</td>
+                        <th>
+                            <a href="$" class="btn btn-primary"></a>
+                        </th>
                     </tr>
-                    @include('modal.mPaymentO')
-                @endif
+                    
                 
-
+                @endforeach
+    
+                
             </tbody>
         </table>
-
-       
-
         @section('js')
         <script src="https://code.jquery.com/jquery-3.5.1.js" ></script>
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" ></script>
@@ -104,7 +92,6 @@
                 });
             });
         </script>
-        
     @endsection
     </div>
 @endsection

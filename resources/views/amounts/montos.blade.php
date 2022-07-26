@@ -28,23 +28,40 @@
     </div>
     
     <br>
-    <div style="width: 40%">
+    <div >
     <table id="montos" class="table table-striped dt-responsive nowrap table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Monto por m^2</th>
                 <th>Año fiscal</th>
+                <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($montos as $monto)
-                @if ($monto->estatus_monto == 1)
-                    <tr>
-                        <td>${{ number_format($monto->monto,2) }}</td>
-                        <td>{{ $monto->year }}</td>
-                    </tr>
-                @endif
-            
+                <tr>
+                    <td>${{ number_format($monto->monto,2) }}</td>
+                    <td>{{ $monto->year }}</td>
+                    <td>
+                        @if ($monto->estatus_monto == 1)
+                            Activo
+                        @else
+                            Inactivo
+                        @endif
+                            
+                    </td>
+                    <td>
+                        @if ($monto->estatus_monto == 1)
+                            
+                        @else
+                            <a class="btn btn-primary" href="{{ route('monto.update', $monto->id_montos) }}">
+                                Activar este costo.
+                            </a>
+                        @endif
+                        
+                    </td>
+                </tr>
             @endforeach
 
             

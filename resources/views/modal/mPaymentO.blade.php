@@ -1,19 +1,19 @@
 <form action="" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="modal fade" id="pagarModal{{ $local->id_local }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="pagarModalotros{{ $locales->id_local }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title {{ $local->id_local }}</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title {{ $locales->id_local }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="id_comerciante" value="{{ $local->id_comerciante }}">
-                    <input type="hidden" name="id_local" value="{{ $local->id_local }}">
+                    <input type="hidden" name="id_comerciante" value="{{ $locales->id_comerciante }}">
+                    <input type="hidden" name="id_local" value="{{ $locales->id_local }}">
                     <div class="d-flex justify-content-between row ">
                         <div class="mb-3 col-4 border">
                             <label for="name" class="form-label">Nombre</label>
-                            <input type="text" name="name" class="form-control" value="{{ $local->nombre_comerciante}} {{ $local->apellido_comerciante}}" id="name" aria-describedby="nameHelp" readonly>
+                            <input type="text" name="name" class="form-control" value="{{ $locales->nombre_comerciante}} {{ $locales->apellido_comerciante}}" id="name" aria-describedby="nameHelp" readonly>
                             <div id="nameHelp" class="form-text">Nombre del que pagó.</div>
                             @error('name')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -21,8 +21,8 @@
                         </div>
                         <div class="mb-3 col-6 border">
                             <label for="business" class="form-label">Giro</label>
-                            <input type="text" name="business" class="form-control" value="{{ $local->giro }}" id="business" aria-describedby="businessHelp" readonly hidden>
-                            <input type="text"  class="form-control" value="{{ trim($local->giro, ',') }}"   readonly>
+                            <input type="text" name="business" class="form-control" value="{{ $locales->giro }}" id="business" aria-describedby="businessHelp" readonly hidden>
+                            <input type="text"  class="form-control" value="{{ trim($locales->giro, ',') }}"   readonly>
                             <div id="businessHelp" class="form-text">Giro(s).</div>
                             @error('business')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3 col-12 border">
                             <label for="ubication" class="form-label">Ubicación</label>
-                            <input type="text" name="ubication" class="form-control" value="{{ $local->ubicacion_reco }}" id="ubication" aria-describedby="ubicationHelp" readonly>
+                            <input type="text" name="ubication" class="form-control" value="{{ $locales->ubicacion_reco }}" id="ubication" aria-describedby="ubicationHelp" readonly>
                             <div id="ubicationHelp" class="form-text">Ubicación del local.</div>
                             @error('ubication')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -46,16 +46,19 @@
                         </div>
                         <div class="mb-3 col-6 border">
                             <label for="days" class="form-label">Dias</label>
-                            <input type="text"  class="form-control"  id="days" value="{{ $local->dia }}" hidden>
+                            <input type="text" name="days" class="form-control" value="{{ $locales->dias }}" id="days" aria-describedby="daysHelp" readonly hidden>
                             <input type="text"  class="form-control" 
-                                @if ($local->dia == 1 ) value="LUNES" @endif
-                                @if ($local->dia == 2 ) value="MARTES" @endif
-                                @if ($local->dia == 3 ) value="MIÉRCOLES" @endif
-                                @if ($local->dia == 4 ) value="JUEVES" @endif
-                                @if ($local->dia == 5 ) value="VIERNES" @endif
-                                @if ($local->dia == 6 ) value="SÁBADO" @endif
-                                @if ($local->dia == 7 ) value="DOMINGO" @endif
-                            readonly>
+                                @for ($i=1; $i<=strlen($locales->dias); $i++)
+                                    
+                                    {{ $locales->dias = str_replace("1", "LUNES", $locales->dias) }}
+                                    {{ $locales->dias = str_replace("2", "MARTES", $locales->dias) }}
+                                    {{ $locales->dias = str_replace("3", "MIÉRCOLES", $locales->dias) }}
+                                    {{ $locales->dias = str_replace("4", "JUEVES", $locales->dias) }}
+                                    {{ $locales->dias = str_replace("5", "VIERNES", $locales->dias) }}
+                                    {{ $locales->dias = str_replace("6", "SÁBADO", $locales->dias) }}
+                                    {{ $locales->dias = str_replace("7", "DOMINGO", $locales->dias) }}
+                                @endfor
+                            value="{{ trim($locales->dias, ',') }}"   readonly>
                             <div id="daysHelp" class="form-text">Dias que labora el comerciante.</div>
                             @error('days')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -75,7 +78,7 @@
                         </div>
                         <div class="mb-3 col-3 border">
                             <label for="rfc" class="form-label">RFC</label>
-                            <input type="text" name="rfc" class="form-control" id="rfc" value="{{ $local->rfc }}" aria-describedby="folioHelp" readonly>
+                            <input type="text" name="rfc" class="form-control" id="rfc" value="{{ $locales->rfc }}" aria-describedby="folioHelp" readonly>
                             <div id="rfcHelp" class="form-text">Registro federal del contribuyente. </div>
                             
                         </div>
@@ -86,13 +89,13 @@
                         </div>
                         <div class="mb-3 col-3 border">
                             <label for="measurements" class="form-label">Medidas.</label>
-                            <input type="text" name="measurment" class="form-control" id="measurements" value="{{ $local->dimx}} x {{ $local->dimy }}" aria-describedby="measurementsHelp" disabled>
+                            <input type="text" name="measurment" class="form-control" id="measurements" value="{{ $locales->dimx}} x {{ $locales->dimy }}" aria-describedby="measurementsHelp" disabled>
                             <div id="measurementHelp" class="form-text">Medidas del local del comerciante. </div>
                         </div>
                         
                         <div class="mb-3 col-3 border">
                             <label for="value" class="form-label">Cantidad del pago por los día. $</label>
-                            <input type="text" name="value" class="form-control" id="value" value="{{ $local->dimx * $local->dimy * $monto->monto }}" aria-describedby="valueHelp" readonly>
+                            <input type="text" name="value" class="form-control" id="value" value="{{ $locales->dimx * $locales->dimy * $monto->monto }}" aria-describedby="valueHelp" readonly>
                             <div id="valueHelp" class="form-text">Cantidad que el ciudadano va a pagar. </div>
                             
                         </div>

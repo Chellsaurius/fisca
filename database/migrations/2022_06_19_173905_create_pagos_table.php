@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id('id_pago');
-            $table->string('folio');
+            $table->string('folio')->default('null');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->string('rfc');
             $table->float('monto', 8, 2);
             $table->string('dias_laborales');
-            $table->string('estatus_pago')->default('1')->comment('1 = activo, 2 = inactivo');
+            $table->string('estatus_pago')->default('2')->comment('1 = pagado, 2 = no pagado');
             $table->unsignedBigInteger('id_comerciante')->nullable();
             $table->foreign('id_comerciante')->references('id_comerciante')->on('comerciantes');
             $table->unsignedBigInteger('id_local')->nullable();

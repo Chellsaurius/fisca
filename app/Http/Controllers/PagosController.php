@@ -38,9 +38,9 @@ class PagosController extends Controller
         $registration = Registro::all()->where('id_registro', $registro)->where('estatus_registro', 1)->first();
         $local = Local::all()->where('id_local', $registration->id_local)->where('status_local', 1)->first();
         
-        $ahorita = Carbon::now();
-        $fModificada = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ahorita)->format('Y');
-        $monto = Monto::orderBy('id_montos', 'desc')->where('year', $fModificada)->first();
+        //$ahorita = Carbon::now();
+        //$fModificada = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $ahorita)->format('Y');
+        $monto = Monto::orderBy('id_montos', 'desc')->where('estatus_monto', 1)->first();
         //dd($merchant, $registration, $local);
         $total = 1 * $local->dimx * $local->dimy * $monto->monto;
        
@@ -145,24 +145,43 @@ class PagosController extends Controller
 
     public function localsPayment ($rfc) {
         //dd($rfc);
-
-        $locales = DB::table('comerciantes')
+        $comerciante = Comerciante::where('rfc', $rfc)->first();
+        if ($comerciante->id_categoria == 1) {
+            # code...
+            $locales = DB::table('comerciantes')
+            ->join('registros', 'comerciantes.id_comerciante', '=', 'registros.id_comerciante')
+            ->join('locals', 'registros.id_local', '=', 'locals.id_local')
+            ->join('tianguis', 'tianguis.id_tianguis', '=', 'locals.id_tianguis')
+            ->select('comerciantes.*', 'locals.*', 'tianguis.*')
+            ->where('estatus_registro', 1)
+            ->where('rfc', $rfc)
+            ->get();
+            //dd($locales);
+        }
+        else{
+            $locales = DB::table('comerciantes')
             ->join('registros', 'comerciantes.id_comerciante', '=', 'registros.id_comerciante')
             ->join('locals', 'registros.id_local', '=', 'locals.id_local')
             ->leftJoin('tianguis', 'tianguis.id_tianguis', '=', 'locals.id_tianguis')
             ->select('comerciantes.*', 'locals.*', 'tianguis.*')
             ->where('estatus_registro', 1)
             ->where('rfc', $rfc)
-            ->get();
-        //dd($locales);
+            ->first();
+            //dd($locales);
+        }
 
-
-
-        $monto = Monto::all();
+        $monto = Monto::where('estatus_monto', 1)->first();
             
-        return view('payments.dPayments',  ['rfc' => $rfc])->with(compact('locales', 'monto'));
+        return view('payments.dPayments',  ['rfc' => $rfc])->with(compact('comerciante', 'locales', 'monto'));
         //return view('payments/DPayments', ['rfc' => $rfc, 'registro' => $registration->id_registro])
         //    ->with(compact('merchant', 'registration', 'local', 'monto', 'total'));
         //return view('merchants.rComerciantes', compact('types'));
+    }
+
+    public function pendingPayments() {
+        $payments = Pago::all()->where('estatus_pago', 2);
+        //$merchants = Comerciante::all()->where('estatus_comerciante', 1);
+
+        return view('payments.lPayments', compact('payments'));
     }
 }

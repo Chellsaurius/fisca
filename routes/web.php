@@ -35,6 +35,7 @@ Route::controller(MontosController::class)->group(function () {
     Route::get('montos', 'index')->name('montos')->middleware('auth');
     Route::post('montos', 'store')->name('montos.store')->middleware('auth');
     Route::get('nuevo_monto', 'nmonto')->name('nmontos')->middleware('auth');
+    Route::get('nuevo_monto/{id}', 'activateMonto')->name('monto.update')->middleware('auth');
 });
 
 Route::controller(ComercianteController::class)->group(function() {
@@ -64,6 +65,7 @@ Route::controller(PagosController::class)->group(function() {
     Route::get('nuevoPago/{rfc}/{registro}', 'newPayment')->name('payment.new')->middleware('auth');
     Route::post('guardarPago', 'savePayment')->name('payment.save')->middleware('auth');
     Route::get('localesPago/{rfc}', 'localsPayment')->name('payment.locals')->middleware('auth');
+    Route::get('ListaPagosPendientes', 'pendingPayments')->name('payments.pending')->middleware('auth');
     //Route::get('nuevoAdeudoPago/{rfc}', 'newDuePayment')->name('payment.due')->middleware('auth');
     
 });
