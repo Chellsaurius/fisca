@@ -11,6 +11,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
+use File;
 
 class PagosController extends Controller
 {
@@ -54,14 +56,11 @@ class PagosController extends Controller
 
         $merchant = Comerciante::all()->where('rfc', $request->rfc)->where('estatus_comerciante', 1)->first();
         //dd($request, $merchant);
-
         /*
         $contador = strlen($merchant->dias);
         $dias = $merchant->dias;
-        
         $dia = ["","","","","","",""];
         $counter = 0;
-
         for ($i=0; $i < $contador; $i++) { 
             
             if($i%2 == 0) {         //esta parte es para preparar el conteido del arreglo quitando las comas 
@@ -69,14 +68,11 @@ class PagosController extends Controller
                 $counter++;
             }  
         }
-
         $count = 0;
         $startDate = \Carbon\Carbon::parse($request->IDatePayment); 
         $endDate = \Carbon\Carbon::parse($request->FDatePayment);
-       
         $interval = $startDate->diff($endDate);
         $numberOfDays = $interval->format('%d');
-
         for ($j=1; $j <= $numberOfDays; $j++) { 
             # code...
             if ($startDate->format('N') == $dia[0]) {
@@ -110,7 +106,6 @@ class PagosController extends Controller
 
             $startDate->modify("+1 days");
         }
-
         $total = $request->value * $count;
         round($total, 2);
         number_format((float)$total, 2, '.', '',);
@@ -128,6 +123,7 @@ class PagosController extends Controller
         try {
             
             //code...
+            //dd($pago);
             $pago->save();
             sleep(2);
 
@@ -170,9 +166,9 @@ class PagosController extends Controller
             //dd($locales);
         }
 
-        $monto = Monto::where('estatus_monto', 1)->first();
+        $montos = Monto::all();
             
-        return view('payments.dPayments',  ['rfc' => $rfc])->with(compact('comerciante', 'locales', 'monto'));
+        return view('payments.dPayments',  ['rfc' => $rfc])->with(compact('comerciante', 'locales', 'montos'));
         //return view('payments/DPayments', ['rfc' => $rfc, 'registro' => $registration->id_registro])
         //    ->with(compact('merchant', 'registration', 'local', 'monto', 'total'));
         //return view('merchants.rComerciantes', compact('types'));
@@ -184,4 +180,30 @@ class PagosController extends Controller
 
         return view('payments.lPayments', compact('payments'));
     }
+
+    public function store(Request $request){
+
+        $user = new UserDetail([
+          'full_name' => $request->get('full_name'),
+          'street_address' => $request->get('street_address'),
+          'city' => $request->get('city'),
+          'zip_code' => $request->get('zip_code')
+        ]);
+  
+        $user->save();
+        return redirect('/index');
+      }
+
+    public function downloadPDF($id){
+
+    $pago = Pago::where('id_pago', $id)->first();
+    //dd($pago);
+
+    $pdf = PDF::loadView('pdf', compact('pago'));
+    
+    return view ('pdf', compact('pago'));
+    //return $pdf->download('pdf.pdf'); 
+
+    }
+
 }

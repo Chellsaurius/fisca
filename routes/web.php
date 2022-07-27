@@ -68,6 +68,7 @@ Route::controller(PagosController::class)->group(function() {
     Route::get('ListaPagosPendientes', 'pendingPayments')->name('payments.pending')->middleware('auth');
     //Route::get('nuevoAdeudoPago/{rfc}', 'newDuePayment')->name('payment.due')->middleware('auth');
     
+    Route::get('downloadPDF/{id}','downloadPDF')->name('payments.dwnlpdf')->middleware('auth');
 });
 
 Route::controller(InspectoresController::class)->group(function(){

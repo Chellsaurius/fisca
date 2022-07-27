@@ -32,6 +32,7 @@
                     <th>Ubicación</th>
                     <th>Dimención X</th>
                     <th>Dimención Y</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,6 +49,10 @@
                         <td>{{ $payment->local->ubicacion_reco }}</td>
                         <td>{{ $payment->local->dimx }}</td>
                         <td>{{ $payment->local->dimy }}</td>
+                        <td>
+                           <a class="btn btn-primary" href="{{ route('payments.dwnlpdf', $payment->id_pago) }}"> Descargar PDF</a> 
+                            
+                        </td>
                     </tr>
                     
                 
@@ -88,6 +93,7 @@
                 });
             });
         </script>
-    @endsection
+        
+        @endsection
     </div>
 @endsection
