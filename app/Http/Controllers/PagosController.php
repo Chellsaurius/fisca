@@ -198,10 +198,11 @@ class PagosController extends Controller
 
     $pago = Pago::where('id_pago', $id)->first();
     //dd($pago);
+    $monto = Monto::orderBy('id_montos', 'desc')->where('estatus_monto', 1)->first();
 
-    $pdf = PDF::loadView('pdf', compact('pago'));
+    $pdf = PDF::loadView('pdf', compact('pago', 'monto'));
     
-    return view ('pdf', compact('pago'));
+    return view ('pdf', compact('pago', 'monto'));
     //return $pdf->download('pdf.pdf'); 
 
     }
