@@ -16,9 +16,9 @@
     <div class="container" id="printArea">
         <div class="border shadow-lg bg-body rounded" style="padding: 10px;">
             <div class="col-md-12">
-                <div class="d-flex justify-content-end row">
+                <div class="d-flex justify-content-end row" style="padding-bottom: -100px !important;">
 
-                    <div class="col-1 border">
+                    <div class="col-1 border" >
                         <p style="font-size: 10px ">Folio</p>
                     </div>
                     <div class="col-5 border">
@@ -37,12 +37,12 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-start row" style="padding-bottom: -50px !important;">
-                    <p style="font-size: 10px "> EL CIUDADANO: {{ $pago->comerciante->nombre_comerciante }} {{ $pago->comerciante->apellido_comerciante }}</p>
+                    <p style="font-size: 10px " style="padding-bottom: -50px !important;"> EL CIUDADANO: {{ $pago->comerciante->nombre_comerciante }} {{ $pago->comerciante->apellido_comerciante }}</p>
                 </div>
-                <div class="d-flex justify-content-start row">
+                <div class="d-flex justify-content-start row" style="padding-bottom: -50px !important;">
                     <p style="font-size: 10px "> EFECTUA EL PAGO EN LA TESORERÍA MUNICIPAL POR LA CANTIDAD DE: $ {{ $pago->monto }} </p>
                 </div>
-                <div class="d-flex justify-content-start row">
+                <div class="d-flex justify-content-start row" style="padding-bottom: -50px !important;">
                     <p style="font-size: 10px "> POR EL CONCEPTO DE:</p>
                 </div>
                 <div class="d-flex justify-content-evenly row col-md-12">
@@ -154,7 +154,7 @@
                 <div class="d-flex justify-content-start row border border-dark border-2">
                     <p style="font-size: 10px "> CÁLCULOS: DÍAS LABORADOS = {{ $pago->dias_laborales }} * COSTO FISCAL =  ${{ $monto->monto }} * DIMENSIONES = {{ $pago->local->dimx }}M * {{ $pago->local->dimy }}M, TOTAL = ${{ $pago->monto }}</p>
                 </div>
-                <div class="d-flex justify-content-center row align-items-center" >
+                <div class="d-flex justify-content-center row align-items-center" style="padding-bottom: -30px !important;">
                     <div class="d-flex justify-content-center">
                         <p style="font-size: 10px "> DATOS GENERALES </p>
                     </div>

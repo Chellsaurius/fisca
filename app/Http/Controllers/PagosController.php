@@ -202,7 +202,7 @@ class PagosController extends Controller
 
     $pdf = PDF::loadView('pdf', compact('pago', 'monto'));
     
-    return view ('pdf', compact('pago', 'monto'));
+    return view ('pdftable', compact('pago', 'monto'));
     //return $pdf->download('pdf.pdf'); 
 
     }
